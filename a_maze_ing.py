@@ -35,17 +35,21 @@ class MazeConfig(BaseModel):
         return self
 
 
-def extract_config() -> Dict[str, str]:
+def extract_config(file_path: str) -> Dict[str, str]:
     config = {}
     try:
-        with open('config.txt', 'r', encoding="utf-8") as file:
+        with open(file_path, 'r', encoding="utf-8") as file:
             for line in file:
                 line = line.strip()
                 if not line or line.startswith("#"):
                     continue
                 if "=" in line:
-                    key, value = line.split("=")
+                    key, value = line.split("=", 1)
                     config[key] = value
+
+                else:
+                    print(f"Error: Invalid line format: {line}")
+                    sys.exit()
 
         mandatory_keys = ["WIDTH", "HEIGHT", "ENTRY", "EXIT", "OUTPUT_FILE",
                           "PERFECT"]
@@ -62,11 +66,19 @@ def extract_config() -> Dict[str, str]:
 
 
 if __name__ == "__main__":
+
+    if len(sys.argv) != 2:
+        print(print("Usage: python3 a_maze_ing.py <config_file>"))
+        sys.exit()
+
+    config_file = sys.argv[1]
+
     try:
-        config_dict = extract_config()
+        config_dict = extract_config(config_file)
         config = MazeConfig(**config_dict)
 
-        print(f"Config validé: {config}")
+        print(f"{config_dict}")
+        print(f"Config validé: {config.OUTPUT_FILE}")
         print(f"Entry: {config.ENTRY}, Exit: {config.EXIT}")
 
     except ValidationError as e:
