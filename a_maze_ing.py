@@ -1,7 +1,31 @@
 import sys
-from typing import Dict
+from typing import Dict, List, Tuple
 from typing_extensions import Self
 from pydantic import BaseModel, Field, field_validator, model_validator, ValidationError
+
+
+def maze_data_extract(file: str) -> Tuple[List[str], str, str, str]:
+    try:
+        with open(file, 'r', encoding="utf-8") as lines:
+            all_lines = [line.strip() for line in lines if line.strip()]
+
+            if len(all_lines) < 4:
+                raise ValueError("The file must contain at least 4 lines "
+                                 "(maze + entry + exit + path)")
+
+            maze = all_lines[:-3]
+            entry = all_lines[-3]
+            exit_coord = all_lines[-2]
+            path = all_lines[-1]
+
+            return maze, entry, exit_coord, path
+
+    except FileNotFoundError:
+        print(f"Error : The file {file} has not been generated")
+        sys.exit()
+    except ValueError as e:
+        print(f"Error : {e}")
+        sys.exit()
 
 
 class MazeConfig(BaseModel):
@@ -78,8 +102,13 @@ if __name__ == "__main__":
         config = MazeConfig(**config_dict)
 
         print(f"{config_dict}")
-        print(f"Config validé: {config.OUTPUT_FILE}")
-        print(f"Entry: {config.ENTRY}, Exit: {config.EXIT}")
+        print(f"TEST Config: {config.OUTPUT_FILE}")
+        print()
+        print(f"TEST E/E : Entry: {config.ENTRY}, Exit: {config.EXIT}")
+
+        print()
+        maze = maze_data_extract(config.OUTPUT_FILE)
+        print(f"TEST : {maze}")
 
     except ValidationError as e:
         print("Expected validation error:")
