@@ -1,8 +1,11 @@
 import sys
+import mlx
 from typing import Dict, List, Tuple
 from typing_extensions import Self
 from pydantic import BaseModel, Field, field_validator, model_validator, ValidationError
 
+def choice_color():
+    return 0xFFFFFF
 
 def decode_walls(maze: str) -> Dict[str, bool]:
     
@@ -14,6 +17,25 @@ def decode_walls(maze: str) -> Dict[str, bool]:
         "S": bool(wall & 4),
         "W": bool(wall & 8)
     }
+
+
+def draw_walls(mlx_win, win, coord: List[str], config: 'MazeConfig', pixel_size: int) -> None:
+    
+    #ent_x, ent_y = map(int, config.ENTRY.split(","))
+    #end_x, end_y = map(int, config.EXIT.split(","))
+
+    for y, line in enumerate(coord):
+        for x, hexa in enumerate(line):
+
+            y_p = y * pixel_size
+            x_p = x * pixel_size
+
+            walls = decode_walls(hexa)
+            color = choice_color()
+
+            if walls["N"]:
+                mlx_win.line()
+
 
 
 def maze_data_extract(file: str) -> Tuple[List[str], str, str, str]:
@@ -122,7 +144,14 @@ if __name__ == "__main__":
         maze = maze_data_extract(config.OUTPUT_FILE)
         print(f"TEST : {maze}")
         
-        print("\n" + "Dessin".center(65, "="))
+        print("\n" + "Dessin MLX".center(65, "="))
+        mlx_win = mlx.init()
+
+        pixel_size = 64
+        win_width = config.WIDTH * pixel_size
+        win_height = config.HEIGHT * pixel_size
+
+        win = mlx_win.new_window(win_width, win_height, "A-MAZE-ING")
 
 
     except ValidationError as e:
