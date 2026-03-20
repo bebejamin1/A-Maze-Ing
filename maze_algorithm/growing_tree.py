@@ -7,7 +7,7 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/18 11:31:23 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/20 12:13:13 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/20 15:55:51 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -27,7 +27,7 @@ def print_fortytwo(grid: list[list[int]], finish: str,
 
         w: int = int(round(((width - 7) / 2), 0))
         h: int = int(round(((height - 5) / 2), 0))
-        print(f"w = {w}, h = {h}")
+
         paterns = [(0, 0), (1, 0), (1, 0), (0, 1), (0, 1), (1, 0), (1, 0),  # 4
                    (-4, 2), (0, 1), (0, 1), (1, 0), (1, 0),  # 2
                    (0, -1), (0, -1), (1, 0), (1, 0), (0, 1), (0, 1)]  # 2
@@ -115,12 +115,9 @@ def maze(grid: list[list[int]], width: int, height: int,
 
 def main() -> None:
     width = height = 15
-    # height = 10
-    # width = 10
-    # x1, x2 = random.randint(0, (width - 1)), random.randint(0, (width - 1))
-    # y1, y2 = random.randint(0, (height - 1)), random.randint(0, (height - 1))
+
     entry = (0, 0)
-    finish = (width - 1, height - 1)
+    finish = (14, 11)
 
     grid = np.array([[15 for _ in range(width)] for _ in range(height)])
 
