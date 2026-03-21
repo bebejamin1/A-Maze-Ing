@@ -1,7 +1,31 @@
 import sys
-from typing import Dict
+from typing import Dict, List, Tuple
 from typing_extensions import Self
-from pydantic import BaseModel, Field, field_validator, model_validator, ValidationError
+from pydantic import BaseModel, Field, field_validator, model_validator, ValidationError  # noqa
+
+
+def maze_data_extract(file: str) -> Tuple[List[str], str, str, str]:
+    try:
+        with open(file, 'r', encoding="utf-8") as lines:
+            all_lines = [line.strip() for line in lines if line.strip()]
+
+            if len(all_lines) < 4:
+                raise ValueError("The file must contain at least 4 lines "
+                                 "(maze + entry + exit + path)")
+
+            maze = all_lines[:-3]
+            entry = all_lines[-3]
+            exit_coord = all_lines[-2]
+            path = all_lines[-1]
+
+            return maze, entry, exit_coord, path
+
+    except FileNotFoundError:
+        print(f"Error : The file {file} has not been generated")
+        sys.exit()
+    except ValueError as e:
+        print(f"Error : {e}")
+        sys.exit()
 
 
 class MazeConfig(BaseModel):
@@ -35,17 +59,21 @@ class MazeConfig(BaseModel):
         return self
 
 
-def extract_config() -> Dict[str, str]:
+def extract_config(file_path: str) -> Dict[str, str]:
     config = {}
     try:
-        with open('config.txt', 'r', encoding="utf-8") as file:
+        with open(file_path, 'r', encoding="utf-8") as file:
             for line in file:
                 line = line.strip()
                 if not line or line.startswith("#"):
                     continue
                 if "=" in line:
-                    key, value = line.split("=")
+                    key, value = line.split("=", 1)
                     config[key] = value
+
+                else:
+                    print(f"Error: Invalid line format: {line}")
+                    sys.exit()
 
         mandatory_keys = ["WIDTH", "HEIGHT", "ENTRY", "EXIT", "OUTPUT_FILE",
                           "PERFECT"]
@@ -62,12 +90,25 @@ def extract_config() -> Dict[str, str]:
 
 
 if __name__ == "__main__":
+
+    if len(sys.argv) != 2:
+        print(print("Usage: python3 a_maze_ing.py <config_file>"))
+        sys.exit()
+
+    config_file = sys.argv[1]
+
     try:
-        config_dict = extract_config()
+        config_dict = extract_config(config_file)
         config = MazeConfig(**config_dict)
 
-        print(f"Config validé: {config}")
-        print(f"Entry: {config.ENTRY}, Exit: {config.EXIT}")
+        print(f"{config_dict}")
+        print(f"TEST Config: {config.OUTPUT_FILE}")
+        print()
+        print(f"TEST E/E : Entry: {config.ENTRY}, Exit: {config.EXIT}")
+
+        print()
+        maze = maze_data_extract(config.OUTPUT_FILE)
+        print(f"TEST : {maze}")
 
     except ValidationError as e:
         print("Expected validation error:")
