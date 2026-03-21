@@ -7,7 +7,7 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/21 12:17:31 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/21 14:18:57 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/21 15:24:35 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -18,6 +18,7 @@ import random
 
 # from test_display import debug_display
 
+# voir porte logique
 
 # *****************************************************************************
 # *                        print_fortytwo()                                   *

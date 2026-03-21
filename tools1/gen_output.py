@@ -7,14 +7,12 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/20 09:02:11 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/21 10:49:58 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/21 15:23:32 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-# algorithme bfs
-def find_way(grid: list[list[int]], start: tuple[int],
-             finish: tuple[int]) -> list[str]:
-    pass
+
+from bfs_algorithm import find_way
 
 
 def output(grid: list[list[int]]):

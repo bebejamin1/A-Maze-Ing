@@ -3,6 +3,8 @@
 #  both the correct encoding.
 # Usage: python3 output_validator.py output_maze.txt
 
+# ✨​ script fourni par le sujet
+
 import sys
 
 if len(sys.argv) != 2:
