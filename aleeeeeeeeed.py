@@ -1,45 +1,74 @@
-def draw_walls(mlx_ptr, win, grid: List[str], config: MazeConfig, p_size: int) -> None:
-    # On parcourt chaque ligne (y)
-    for y, row in enumerate(grid):
-        # On parcourt chaque colonne (x)
-        for x, char_hex in enumerate(row):
-            # Calcul du coin supérieur gauche de la case en pixels
-            x_p = x * p_size
-            y_p = y * p_size
+def draw_walls(coord: List[str], config: 'MazeConfig') -> None:
+
+    height = len(coord)
+    width = len(coord[0])
+    
+    # 1. On crée une grille totalement remplie de murs
+    grid = [["██" for _ in range(width * 2 + 1)] for _ in range(height * 2 + 1)]
+    
+    # 2. On creuse les passages selon les données hexadécimales
+    for y, line in enumerate(coord):
+        for x, hexa in enumerate(line):
+            walls = decode_walls(hexa)
             
-            # Décodage du caractère hexadécimal
-            walls = decode_walls(char_hex)
+            # Coordonnées du centre de la case dans la nouvelle grille
+            cx = x * 2 + 1
+            cy = y * 2 + 1
+            
+            # On creuse le centre
+            grid[cy][cx] = "  " 
+            
+            # On creuse les murs adjacents s'ils sont ouverts (False = pas de mur)
+            if not walls["N"]: grid[cy - 1][cx] = "  "
+            if not walls["S"]: grid[cy + 1][cx] = "  "
+            if not walls["E"]: grid[cy][cx + 1] = "  "
+            if not walls["W"]: grid[cy][cx - 1] = "  "
 
-            # Couleur des murs (blanc par exemple)
-            color = 0xFFFFFF 
+    # 3. On place l'Entrée (EE) et la Sortie (XX)
+    ent_x, ent_y = map(int, config.ENTRY.split(","))
+    end_x, end_y = map(int, config.EXIT.split(","))
+    grid[ent_y * 2 + 1][ent_x * 2 + 1] = "EE"
+    grid[end_y * 2 + 1][end_x * 2 + 1] = "XX"
 
-            # Dessin des segments de mur
-            if walls["N"]: # Mur du haut
-                mlx_ptr.line(win, x_p, y_p, x_p + p_size, y_p, color)
-            if walls["S"]: # Mur du bas
-                mlx_ptr.line(win, x_p, y_p + p_size, x_p + p_size, y_p + p_size, color)
-            if walls["E"]: # Mur de droite
-                mlx_ptr.line(win, x_p + p_size, y_p, x_p + p_size, y_p + p_size, color)
-            if walls["W"]: # Mur de gauche
-                mlx_ptr.line(win, x_p, y_p, x_p, y_p + p_size, color)
+    # 4. On affiche le résultat final
+    for row in grid:
+        print("".join(row))
 
-if main
 
-                # On extrait les données du fichier généré
-        # maze_data[0] contient la grille de caractères
-        maze_data = maze_data_extract(config.OUTPUT_FILE)
-        grid = maze_data[0] 
-        
-        # Initialisation MLX
-        mlx_ptr = mlx.Mlx() # Selon ton wrapper, l'appel peut varier
-        
-        pixel_size = 64
-        win_width = config.WIDTH * pixel_size
-        win_height = config.HEIGHT * pixel_size
-        win = mlx_ptr.new_window(win_width, win_height, "A-MAZE-ING")
+ef draw_walls(coord: List[str], config: 'MazeConfig') -> None:
+    height = len(coord)
+    width = len(coord[0])
+    
+    # --- DESIGN : Codes couleurs ANSI pour le terminal ---
+    WALL = "\033[90m██\033[0m"  # Gris foncé pour les murs
+    PATH = "  "                 # Espace vide pour les couloirs
+    ENT  = "\033[92m██\033[0m"  # Vert fluo pour l'Entrée
+    EXT  = "\033[91m██\033[0m"  # Rouge fluo pour la Sortie
+    
+    # 1. On initialise un bloc de murs massif
+    grid = [[WALL for _ in range(width * 2 + 1)] for _ in range(height * 2 + 1)]
+    
+    # 2. On sculpte les passages à l'intérieur
+    for y, line in enumerate(coord):
+        for x, hexa in enumerate(line):
+            walls = decode_walls(hexa)
+            
+            # Centre de la cellule courante
+            cx, cy = x * 2 + 1, y * 2 + 1
+            grid[cy][cx] = PATH 
+            
+            # On casse les murs s'ils sont ouverts (False = pas de mur)
+            if not walls["N"]: grid[cy - 1][cx] = PATH
+            if not walls["S"]: grid[cy + 1][cx] = PATH
+            if not walls["E"]: grid[cy][cx + 1] = PATH
+            if not walls["W"]: grid[cy][cx - 1] = PATH
 
-        # APPEL DU DESSIN
-        draw_walls(mlx_ptr, win, grid, config, pixel_size)
+    # 3. On peint l'Entrée et la Sortie
+    ent_x, ent_y = map(int, config.ENTRY.split(","))
+    end_x, end_y = map(int, config.EXIT.split(","))
+    grid[ent_y * 2 + 1][ent_x * 2 + 1] = ENT
+    grid[end_y * 2 + 1][end_x * 2 + 1] = EXT
 
-        # On lance la boucle pour que la fenêtre reste ouverte
-        mlx_ptr.loop()
+    # 4. Affichage du chef-d'œuvre
+    for row in grid:
+        print("".join(row))

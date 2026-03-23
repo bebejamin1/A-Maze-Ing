@@ -1,7 +1,7 @@
 #key=value format
 WIDTH=20
 HEIGHT=15
-ENTRY=1,2
+ENTRY=14,2
 EXIT=19,2
 OUTPUT_FILE=maze.txt
 PERFECT=false
