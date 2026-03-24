@@ -7,23 +7,40 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/20 09:02:11 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/23 17:15:43 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/24 11:56:23 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 
-from bfs_algorithm import find_way
+# from bfs_algorithm import find_way
+
+red = "\033[31m\033[5m\033[1m"
+reset = "\033[0m"
 
 
 def output(grid: list[list[int]], start: tuple[int], finish: tuple[int],
            way: list[str]):
-    tab = []
+
+    entry = f"{start[0]},{start[1]}"
+    end = f"{finish[0]},{finish[1]}"
+
     try:
-        
-    try:
-        with open("output_maze.txt", "w") as f:
+        with open("../output_maze.txt", "w") as f:
+            for y, row in enumerate(grid):  # rangee
+                for x, value in enumerate(row):
+                    number = hex(value)[2:]
+                    f.write(number)
+                f.write("\n")
+            f.write("\n")
+            f.write(entry)
+            f.write("\n")
+            f.write(end)
+            f.write("\n")
+            for w in way:
+                f.write(w)
     except (ValueError, AttributeError) as e:
-        print(f"ERROR: {e}")
+        print(f"{red}[ERROR]{reset}: in gen_output.py {e}")
+        exit()
 
 
 if __name__ == "__main__":
@@ -49,6 +66,7 @@ if __name__ == "__main__":
     start = (1, 1)
     finish = (19, 14)
 
-    way = find_way(grid, start, finish)
+    # way = find_way(grid, start, finish)
+    way = ["N", "N", "W", "S", "W", "W", "E", "S", "D"]
 
     output(grid, start, finish, way)

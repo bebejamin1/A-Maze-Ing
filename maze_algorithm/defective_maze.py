@@ -7,11 +7,11 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/21 12:17:31 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/23 15:01:33 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/24 12:54:29 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-from typing import Optional
+from typing import Optional, Any
 
 # import numpy as np
 import random
@@ -59,7 +59,8 @@ def print_fortytwo(grid: list[list[int]], finish: str,
 def look_neighbor(grid: list[list[int]], x1: int, y1: int,
                   w: int, h: int) -> list:
 
-    directions = [(0, -1, "N"), (1, 0, "E"), (0, 1, "S"), (-1, 0, "W")]
+    directions: list[tuple[Any]] = [(0, -1, "N"), (1, 0, "E"),
+                                    (0, 1, "S"), (-1, 0, "W")]
     virgin_neighbor: list[str] = []
 
     for x, y, c in directions:
