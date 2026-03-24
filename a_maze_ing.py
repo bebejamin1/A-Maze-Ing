@@ -5,9 +5,8 @@ from pydantic import (BaseModel, Field, field_validator, model_validator,
                       ValidationError)
 
 
-
 def choice_color():
-    return 0xFFFFFF
+    return 
 
 
 def decode_walls(maze: str) -> Dict[str, bool]:
@@ -23,14 +22,34 @@ def decode_walls(maze: str) -> Dict[str, bool]:
 
 
 def draw_walls(coord: List[str], config: 'MazeConfig') -> None:
+    ent_x, ent_y = map(int, config.ENTRY.split(","))
+    ext_x, ext_y = map(int, config.EXIT.split(","))
 
-    height = config.HEIGHT
-    width = config.WIDTH
+    wall = "██"
 
-    
+    for y, line in enumerate(coord):
+        top_line = ""
+        mid_line = ""
 
+        for x, hexa in enumerate(line):
+            walls = decode_walls(hexa)
 
+            top_line += wall
+            top_line += wall if walls["N"] else "  "
 
+            mid_line += wall if walls["W"] else "  "
+            
+            if x == ent_x and y == ent_y:
+                mid_line += "🟩"
+            elif x == ext_x and y == ext_y:
+                mid_line += "🏁"
+            else:
+                mid_line += "  "
+
+        print(top_line + wall)
+        print(mid_line + wall)
+
+    print(wall * (config.WIDTH * 2 + 1))
 
 def maze_data_extract(file: str) -> Tuple[List[str], str, str, str]:
     try:
