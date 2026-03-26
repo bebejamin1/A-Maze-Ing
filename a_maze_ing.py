@@ -4,6 +4,8 @@ import draw
 import parsing
 
 
+
+
 if __name__ == "__main__":
 
     if len(sys.argv) != 2:
@@ -12,24 +14,38 @@ if __name__ == "__main__":
 
     config_file = sys.argv[1]
 
-    try:
-        config_dict = parsing.extract_config(config_file)
-        config = parsing.MazeConfig(**config_dict)
+    config_dict = parsing.extract_config(config_file)
+    config = parsing.MazeConfig(**config_dict)
 
-        print(f"{config_dict}")
-        print(f"TEST Config: {config.OUTPUT_FILE}")
+    print()
+    print("     .-.   .-.     .--.                         ".center(60, " "))
+    print("    | OO| | OO|   / _.-' .-.   .-.  .-.   .''.  ".center(60, " "))
+    print("    |   | |   |   \  '-. '-'   '-'  '-'   '..'  ".center(60, " "))
+    print("    '^^^' '^^^'    '--'                         ".center(60, " "))
+    print()
+
+
+    print("    WELCOME !")
+    while True:
         print()
-        print(f"TEST E/E : Entry: {config.ENTRY}, Exit: {config.EXIT}")
+        print("1 - Re-generate a new maze")
+        print("2 - Show/Hide path from entry to exit")
+        print("3 - Rotate maze colors")
+        print("4 - Quit")
 
-        print()
-        maze, entry, exit_coord, path = parsing.maze_data_extract(config.OUTPUT_FILE)
-        print(f"TEST : {maze}")
-        
-        print("\n" + "Dessin".center(65, "="))
-
-        draw.draw_walls(maze, config, path)
-
-    except ValidationError as e:
-        print("Expected validation error:")
-        print(e.errors()[0]["msg"])
-        sys.exit()
+        try:
+            choice = int(input("\nWhat do you want ? : "))
+            maze, entry, exit_coord, path = parsing.maze_data_extract(config.OUTPUT_FILE)
+            if choice == 1:
+                draw.draw_walls(maze, config, path, False)
+            elif choice == 2:
+                pass
+            elif choice == 3:
+                color = True
+                draw.draw_walls(maze, config, path, True)
+            elif choice == 4:
+                print("Goodbye!")
+                sys.exit()
+        except Exception as e:
+            print(f"ERROR: {e}")
+       

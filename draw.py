@@ -2,7 +2,7 @@ import os
 import sys
 import random
 import time
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 from parsing import MazeConfig
 
 
@@ -13,20 +13,26 @@ COLORS = [
     "\033[34m",
     "\033[35m",
     "\033[36m",
-    "\033[37m",
     "\033[0;91m",
     "\033[0;95m",
+]
+
+COLORS_42 = [
+    "\033[30m",
+    "\033[37m",
+    "\033[0;96m",
 ]
 
 RESET = "\033[0m"
 
 def get_wall_color() -> str:
+        print()
         print("Choose your color:")
         print("1 - Pink")
         print("2 - Green")
         print("3 - Yellow")
         print("4 - Blue")
-        print("5 - Purple")
+        print("5 - Pink")
         print("6 - Cyan")
         print("7 - Default (white)")
 
@@ -34,7 +40,12 @@ def get_wall_color() -> str:
         
         try:
             choice_int = int(choice)
-            return COLORS[choice_int - 1]
+            if 0 < choice_int < 8:
+                if choice_int == 7:
+                    return "\033[37m"
+                return COLORS[choice_int - 1]
+            else:
+                raise ValueError
         except (ValueError, IndexError):
             print(f"Incorrect input: you must choose a number between 1 and 7")
             sys.exit()
@@ -55,7 +66,6 @@ def decode_path(ent_x: int, ent_y: int, coord: List[str]) -> Tuple[int]:
 
         path_coord.add((ent_x, ent_y))
 
-    print(path_coord)
     return path_coord
 
 
@@ -72,11 +82,14 @@ def decode_walls(maze: str) -> Dict[str, bool]:
 
 
 def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
-               ) -> None:
+               color: bool) -> None:
     ent_x, ent_y = map(int, config.ENTRY.split(","))
     ext_x, ext_y = map(int, config.EXIT.split(","))
 
-    color = get_wall_color()
+    if color == True:
+        color = get_wall_color()
+    else:
+        color = "\033[37m"
 
     try:
         while True:
@@ -105,6 +118,10 @@ def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
                     elif x == ext_x and y == ext_y:
                         mid_line += "🏁"
                     elif hexa.upper() == "F":
+                        if color != "\033[37m":
+                            other_color = random.choice(COLORS_42)
+                            mid_line += other_color + "██" + RESET
+                            continue
                         color_42 = random.choice(COLORS)
                         mid_line += color_42 + "██" + RESET
                     elif (x, y) in coord_path:
@@ -120,4 +137,4 @@ def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
             time.sleep(0.2)
 
     except KeyboardInterrupt:
-        print("The animation has stopped :(")
+        print("\nThe animation has stopped :(")
