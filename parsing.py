@@ -1,8 +1,15 @@
 import sys
-from typing import Dict, List, Tuple, Set
+from typing import Dict, List, Tuple
 from typing_extensions import Self
 from pydantic import (BaseModel, Field, field_validator, model_validator,
                       ValidationError)
+
+
+def get_tuple(entry: str, exit_coord: str) -> List[Tuple[int]]:
+    ent_x, ent_y = map(int, entry.split(","))
+    ext_x, ext_y = map(int, exit_coord.split(","))
+
+    return [(ent_x, ent_y), (ext_x, ext_y)]
 
 
 def maze_data_extract(file: str) -> Tuple[List[str], str, str, str]:

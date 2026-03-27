@@ -7,7 +7,7 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/18 11:31:23 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/27 11:37:15 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/27 13:56:46 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -17,7 +17,7 @@ from typing import Optional
 import numpy as np
 import random
 
-from defective_maze import deficient_maze
+from maze_algorithm.defective_maze import deficient_maze
 
 
 # *****************************************************************************
@@ -28,7 +28,10 @@ from defective_maze import deficient_maze
 def print_fortytwo(grid: list[list[int]], finish: str,
                    width: int, height: int) -> list[list[int]]:
 
-    if (width >= 11 and height >= 9):
+    width_int = int(width)
+    height_int = int(height)
+
+    if (width_int >= 11 and height_int >= 9):
 
         w: int = int(round(((width - 7) / 2), 0))
         h: int = int(round(((height - 5) / 2), 0))
@@ -80,9 +83,9 @@ def look_neighbor(grid: list[list[int]], x1: int, y1: int,
 # *         Generate the maze using the growing tree algorithm                *
 
 
-def growing_tree(grid: list[list[int]], width: int, height: int,
-                 entry: tuple[int, int], perfect: bool,
-                 seed: Optional[str]) -> list[list[int]]:
+def grow_tree(grid: list[list[int]], width: int, height: int,
+              entry: tuple[int, int], perfect: bool,
+              seed: Optional[str]) -> list[list[int]]:
 
     if (perfect is False and width > 3 and height > 3):
         return (deficient_maze(grid, width, height, entry, seed))

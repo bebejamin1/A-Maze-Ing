@@ -7,14 +7,12 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/21 15:22:46 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/27 11:37:23 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/27 14:16:07 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 from collections import deque
 from typing import List, Tuple
-
-# from test_display import debug_display
 
 
 # *****************************************************************************

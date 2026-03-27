@@ -25,6 +25,7 @@ COLORS_42 = [
 
 RESET = "\033[0m"
 
+
 def get_wall_color() -> str:
         print()
         print("Choose your color:")
@@ -85,7 +86,7 @@ def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
     ent_x, ent_y = map(int, config.ENTRY.split(","))
     ext_x, ext_y = map(int, config.EXIT.split(","))
 
-    if color == True:
+    if color is True:
         color = get_wall_color()
     else:
         color = "\033[37m"

@@ -7,25 +7,31 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/20 09:02:11 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/25 13:33:30 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/27 14:19:54 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 
 # from bfs_algorithm import find_way
+from maze_algorithm.growing_tree import grow_tree
+from tools1.bfs_algorithm import find_way
+import numpy as np
 
 red = "\033[31m\033[5m\033[1m"
 reset = "\033[0m"
 
 
-def output(grid: list[list[int]], start: tuple[int], finish: tuple[int],
-           way: list[str]):
+def output(width, height, start: tuple[int], finish: tuple[int],
+           perfect: list[str], name_file: str) -> None:
+
+    gr = np.array([[15 for _ in range(width)] for _ in range(height)])
+    grid = grow_tree(gr, width, height, start, perfect, "")
+    way = find_way(grid, start, finish, width, height)
 
     entry = f"{start[0]},{start[1]}"
     end = f"{finish[0]},{finish[1]}"
-
     try:
-        with open("../output_maze.txt", "w") as f:
+        with open(name_file, "w") as f:
             for y, row in enumerate(grid):  # rangee
                 for x, value in enumerate(row):
                     number = hex(value)[2:]
@@ -66,7 +72,5 @@ if __name__ == "__main__":
     start = (0, 0)
     finish = (14, 14)
 
-    # way = find_way(grid, start, finish)
-    way = ["N", "N", "W", "S", "W", "W", "E", "S", "D"]
-
-    output(grid, start, finish, way)
+    koi = output(15, 15, start, finish, True, "maze.txt")
+    print(koi)
