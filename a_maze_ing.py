@@ -1,7 +1,9 @@
 import sys
 from pydantic import ValidationError
-import draw
-import parsing
+from visualize.draw import draw_walls
+from visualize.parsing import maze_data_extract, get_tuple, extract_config
+from visualize.parsing import MazeConfig
+from tools1.gen_output import output
 
 
 if __name__ == "__main__":
@@ -13,8 +15,8 @@ if __name__ == "__main__":
     config_file = sys.argv[1]
 
     try:
-        config_dict = parsing.extract_config(config_file)
-        config = parsing.MazeConfig(**config_dict)
+        config_dict = extract_config(config_file)
+        config = MazeConfig(**config_dict)
     except (ValueError, ValidationError) as e:
         print("\nExpected validation error:")
         print(e.errors()[0]["msg"])
@@ -28,27 +30,48 @@ if __name__ == "__main__":
     print("    '^^^' '^^^'    '--'                         ".center(60, " "))
     print()
 
-
     print('\033[43m  WELCOME !  \033[0m'.center(68, " "))
+    show_path = False
     while True:
         print()
         print("1 - Re-generate a new maze")
         print("2 - Show/Hide path from entry to exit")
         print("3 - Rotate maze colors")
         print("4 - Quit")
-
         try:
             choice = int(input("\n" + "\033[40m What do you want ? \033[0m" + ": "))
-            maze, entry, exit_coord, path = parsing.maze_data_extract(config.OUTPUT_FILE)
             if choice == 1:
-                draw.draw_walls(maze, config, path, False)
+                coord = get_tuple(config.ENTRY, config.EXIT)
+                output(config.WIDTH, config.HEIGHT, coord[0], coord[1],
+                       config.PERFECT, config.OUTPUT_FILE, config.SEED)
+                maze, entry, exit_coord, path = maze_data_extract(config.OUTPUT_FILE)
+                draw_walls(maze, config, path, False, show_path)
             elif choice == 2:
-                pass
+                if show_path is False:
+                    show_path = True
+                else:
+                    show_path = False
+                draw_walls(maze, config, path, False, show_path)
             elif choice == 3:
                 color = True
-                draw.draw_walls(maze, config, path, True)
+                maze, entry, exit_coord, path = maze_data_extract(config.OUTPUT_FILE)
+                draw_walls(maze, config, path, color, show_path)
             elif choice == 4:
-                print("Goodbye!")
+                print()
+                print("█████████████████████████████████████".center(70, " "))
+                print("███████▀█████████████████████████████".center(70, " "))
+                print("██████░░█████████████████████████████".center(70, " "))
+                print("█████▀░▄█████████████████████████████".center(70, " "))
+                print("█████░░▀▀▀▀▀███▀▀█████▀▀███▀▀▀▀▀█████".center(70, " "))
+                print("█████░░▄██▄░░███░░███░░███░░███░░████".center(70, " "))
+                print("████░░█████░░███░▄███░░██░░▀▀▀░▄█████".center(70, " "))
+                print("████░░████▀░███░░███▀░███░░██████████".center(70, " "))
+                print("████░░█▀▀░▄████▄░▀▀▀░▄███▄░▀▀▀░▄█████".center(70, " "))
+                print("█████▄▄▄███████████░░██████▄▄████████".center(70, " "))
+                print("██████████████░▀█▀░▄█████████████████".center(70, " "))
+                print("███████████████▄▄▄███████████████████".center(70, " "))
+                print("█████████████████████████████████████".center(70, " "))
+                print()
                 sys.exit()
             else:
                 print("\nIt's not on the menu :/\n")

@@ -1,8 +1,14 @@
 import sys
-from typing import Dict, List, Tuple, Set
+from typing import Dict, List, Tuple, Optional, Any
 from typing_extensions import Self
-from pydantic import (BaseModel, Field, field_validator, model_validator,
-                      ValidationError)
+from pydantic import (BaseModel, Field, field_validator, model_validator)
+
+
+def get_tuple(entry: str, exit_coord: str) -> List[Tuple[int]]:
+    ent_x, ent_y = map(int, entry.split(","))
+    ext_x, ext_y = map(int, exit_coord.split(","))
+
+    return [(ent_x, ent_y), (ext_x, ext_y)]
 
 
 def maze_data_extract(file: str) -> Tuple[List[str], str, str, str]:
@@ -30,12 +36,13 @@ def maze_data_extract(file: str) -> Tuple[List[str], str, str, str]:
 
 
 class MazeConfig(BaseModel):
-    WIDTH: int = Field(gt=1, le=100)
-    HEIGHT: int = Field(gt=1, le=100)
+    WIDTH: int = Field(gt=1, le=50)
+    HEIGHT: int = Field(gt=1, le=50)
     ENTRY: str
     EXIT: str
     OUTPUT_FILE: str
     PERFECT: bool
+    SEED: Optional[Any] = Field(default="")
 
     @field_validator("ENTRY", "EXIT")
     @classmethod

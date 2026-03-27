@@ -1,9 +1,8 @@
 import os
-import sys
 import random
 import time
-from typing import Dict, List, Tuple, Optional
-from parsing import MazeConfig
+from typing import Dict, List, Tuple
+from visualize.parsing import MazeConfig
 
 
 COLORS = [
@@ -25,29 +24,30 @@ COLORS_42 = [
 
 RESET = "\033[0m"
 
+
 def get_wall_color() -> str:
-        print()
-        print("Choose your color:")
-        print("1 - Red")
-        print("2 - Green")
-        print("3 - Yellow")
-        print("4 - Blue")
-        print("5 - Purple")
-        print("6 - Cyan")
-        print("7 - Default (white)")
+    print()
+    print("Choose your color:")
+    print(COLORS[0] + "1 - Red")
+    print(COLORS[1] + "2 - Green")
+    print(COLORS[2] + "3 - Yellow")
+    print(COLORS[3] + "4 - Blue")
+    print(COLORS[4] + "5 - Purple")
+    print(COLORS[5] + "6 - Cyan" + RESET)
+    print("7 - Default (white)")
 
-        choice = input(("So, what would you like? : "))
+    choice = input("\nSo, what would you like? : ")
 
-        try:
-            choice_int = int(choice)
-            if 0 < choice_int < 8:
-                if choice_int == 7:
-                    return "\033[37m"
-                return COLORS[choice_int - 1]
-            else:
-                raise ValueError
-        except ValueError:
-            print(f"\nIncorrect input: you must choose a number between 1 and 7")
+    try:
+        choice_int = int(choice)
+        if 0 < choice_int < 8:
+            if choice_int == 7:
+                return "\033[37m"
+            return COLORS[choice_int - 1]
+        else:
+            raise ValueError
+    except ValueError:
+        print(f"\nIncorrect input: you must choose a number between 1 and 7")
 
 
 def decode_path(ent_x: int, ent_y: int, coord: List[str]) -> Tuple[int]:
@@ -81,11 +81,11 @@ def decode_walls(maze: str) -> Dict[str, bool]:
 
 
 def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
-               color: bool) -> None:
+               color: bool, show_path: bool) -> None:
     ent_x, ent_y = map(int, config.ENTRY.split(","))
     ext_x, ext_y = map(int, config.EXIT.split(","))
 
-    if color == True:
+    if color is True:
         color = get_wall_color()
     else:
         color = "\033[37m"
@@ -112,9 +112,9 @@ def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
 
                     mid_line += wall if walls["W"] else "  "
 
-                    if x == ent_x and y == ent_y:
+                    if x == ent_x and y == ent_y and show_path:
                         mid_line += "🟩"
-                    elif x == ext_x and y == ext_y:
+                    elif x == ext_x and y == ext_y and show_path:
                         mid_line += "🏁"
                     elif hexa.upper() == "F":
                         if color != "\033[37m":
@@ -123,7 +123,7 @@ def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
                             continue
                         color_42 = random.choice(COLORS)
                         mid_line += color_42 + "██" + RESET
-                    elif (x, y) in coord_path:
+                    elif (x, y) in coord_path and show_path:
                         mid_line += "⭐"
                     else:
                         mid_line += "  "
