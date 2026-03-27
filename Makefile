@@ -33,11 +33,6 @@ lint : install
 	flake8 --exclude venv && \
 	mypy . --exclude venv --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
 
-lint-strict : install
-	. ./venv/bin/activate && \
-	flake8 . --exclude venv && \
-	mypy . --strict --exclude venv
-
 clean : 
 	find . -name "__pycache__" -exec rm -rf {} \+
 	find . -name ".mypy_cache" -exec rm -rf {} \+
