@@ -7,7 +7,7 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/18 11:31:23 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/27 10:25:01 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/27 11:37:15 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -17,7 +17,6 @@ from typing import Optional
 import numpy as np
 import random
 
-from test_display import debug_display
 from defective_maze import deficient_maze
 
 
@@ -124,24 +123,24 @@ def growing_tree(grid: list[list[int]], width: int, height: int,
 
 
 # =============================================================================
-# ============================== MAIN ========================================
+# ============================== MAIN =========================================
 # =============================================================================
 
-def main() -> None:
-    # width = height = 5
-    width = 10
-    height = 10
+# def main() -> None:
+#     # width = height = 5
+#     width = 10
+#     height = 10
 
-    entry = (0, 0)
-    finish = ((width - 1), (height - 1))
+#     entry = (0, 0)
+#     finish = ((width - 1), (height - 1))
 
-    grid = np.array([[15 for _ in range(width)] for _ in range(height)])
+#     grid = np.array([[15 for _ in range(width)] for _ in range(height)])
 
-    grid = growing_tree(grid, width, height, entry, True, "")
-    print(*grid, sep="\n")
+#     grid = growing_tree(grid, width, height, entry, True, "")
+#     print(*grid, sep="\n")
 
-    debug_display(grid, width, height, entry, finish, entry)
+#     debug_display(grid, width, height, entry, finish, entry)
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

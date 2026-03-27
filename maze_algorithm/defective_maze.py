@@ -7,17 +7,13 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/21 12:17:31 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/24 12:54:29 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/27 11:37:51 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 from typing import Optional, Any
 
-# import numpy as np
 import random
-
-
-# voir porte logique
 
 
 # *****************************************************************************
