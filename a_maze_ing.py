@@ -41,7 +41,8 @@ if __name__ == "__main__":
             choice = int(input("\n" + "\033[40m What do you want ? \033[0m" + ": "))
             if choice == 1:
                 coord = get_tuple(config.ENTRY, config.EXIT)
-                output(config.WIDTH, config.HEIGHT, coord[0], coord[1], config.PERFECT, config.OUTPUT_FILE)
+                output(config.WIDTH, config.HEIGHT, coord[0], coord[1], 
+                       config.PERFECT, config.OUTPUT_FILE)
                 maze, entry, exit_coord, path = maze_data_extract(config.OUTPUT_FILE)
                 draw_walls(maze, config, path, False)
             elif choice == 2:

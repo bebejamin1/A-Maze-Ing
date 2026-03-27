@@ -7,7 +7,7 @@
 #   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/20 09:02:11 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/27 14:19:54 by bbeaurai           ###   ########.fr      #
+#   Updated: 2026/03/27 15:13:08 by bbeaurai           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -25,7 +25,7 @@ def output(width, height, start: tuple[int], finish: tuple[int],
            perfect: list[str], name_file: str) -> None:
 
     gr = np.array([[15 for _ in range(width)] for _ in range(height)])
-    grid = grow_tree(gr, width, height, start, perfect, "")
+    grid = grow_tree(gr, width, height, start, perfect, "123")
     way = find_way(grid, start, finish, width, height)
 
     entry = f"{start[0]},{start[1]}"
