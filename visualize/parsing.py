@@ -47,7 +47,7 @@ class MazeConfig(BaseModel):
     @field_validator("ENTRY", "EXIT")
     @classmethod
     def check_coordinates_format(cls, value) -> str:
-        if not "," in value:
+        if "," not in value:
             raise ValueError("Coordinates must be 'x,y' format")
         parts = value.split(",")
         if len(parts) != 2:

@@ -44,7 +44,9 @@ def get_wall_color() -> str:
             return "\033[37m"
         return COLORS[choice_int - 1]
     else:
-        raise ValueError("Incorrect input: you must choose a number between 1 and 7")
+        raise ValueError("Incorrect input: you must choose a number between "
+                         "1 and 7")
+
 
 def decode_path(ent_x: int, ent_y: int, coord: List[str]) -> Tuple[int]:
     path_coord = set()
@@ -72,7 +74,7 @@ def decode_walls(maze: str) -> Dict[str, bool]:
         "N": bool(wall & 1),
         "E": bool(wall & 2),
         "S": bool(wall & 4),
-        "W": bool(wall & 8) 
+        "W": bool(wall & 8)
     }
 
 

@@ -39,23 +39,27 @@ if __name__ == "__main__":
         print("3 - Rotate maze colors")
         print("4 - Quit")
         try:
-            choice = int(input("\n" + "\033[40m What do you want ? \033[0m" + ": "))
+            choice = int(input("\n" + "\033[40m What do you want ? \033[0m" +
+                               ": "))
             if choice == 1:
                 coord = get_tuple(config.ENTRY, config.EXIT)
                 output(config.WIDTH, config.HEIGHT, coord[0], coord[1],
                        config.PERFECT, config.OUTPUT_FILE, config.SEED)
-                maze, entry, exit_coord, path = maze_data_extract(config.OUTPUT_FILE)
+                maze, entry, exit_coord, path = maze_data_extract(
+                    config.OUTPUT_FILE)
                 draw_walls(maze, config, path, False, show_path)
             elif choice == 2:
                 if show_path is False:
                     show_path = True
                 else:
                     show_path = False
-                maze, entry, exit_coord, path = maze_data_extract(config.OUTPUT_FILE)                
+                maze, entry, exit_coord, path = maze_data_extract(
+                    config.OUTPUT_FILE)
                 draw_walls(maze, config, path, False, show_path)
             elif choice == 3:
                 color = True
-                maze, entry, exit_coord, path = maze_data_extract(config.OUTPUT_FILE)
+                maze, entry, exit_coord, path = maze_data_extract(
+                    config.OUTPUT_FILE)
                 draw_walls(maze, config, path, color, show_path)
             elif choice == 4:
                 print()
