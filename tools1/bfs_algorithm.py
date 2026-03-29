@@ -1,15 +1,3 @@
-#!/usr/bin/env python3
-# ########################################################################### #
-#   shebang: 1                                                                #
-#                                                          :::      ::::::::  #
-#   bfs_algorithm.py                                     :+:      :+:    :+:  #
-#                                                      +:+ +:+         +:+    #
-#   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
-#                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/21 15:22:46 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/27 14:16:07 by bbeaurai           ###   ########.fr      #
-#                                                                             #
-# ########################################################################### #
 
 from collections import deque
 from typing import List, Tuple
@@ -19,31 +7,32 @@ from typing import List, Tuple
 # *                            neighbors()                                    *
 # *              Check to see if any neighbors are around                     *
 
-def neighbors(grid: List[List[int]], x1: int, y1: int, x2: int, y2: int,
-              width: int, height: int) -> bool:
+def is_valid_neighbor(grid: List[List[int]], current_x: int, current_y: int,
+                       next_x: int, next_y: int,
+                       width: int, height: int) -> bool:
 
-    if (x2 < 0 or y2 < 0 or x2 >= width or y2 >= height):
+    is_within_bounds = 0 <= next_x < width and 0 <= next_y < height
+    if (not is_within_bounds):
         return (False)
 
-    dx = x2 - x1
-    dy = y2 - y1
+    direction_offset_x = next_x - current_x
+    direction_offset_y = next_y - current_y
 
-    direction_bits = {
+    direction_to_wall_bit = {
         (0, -1): 1,
         (1, 0): 2,
         (0, 1): 4,
         (-1, 0): 8
     }
 
-    if ((dx, dy) not in direction_bits):
+    direction = (direction_offset_x, direction_offset_y)
+    if (direction not in direction_to_wall_bit):
         return (False)
 
-    wall_bit = direction_bits[(dx, dy)]
+    wall_bit = direction_to_wall_bit[direction]
+    has_wall = grid[current_y][current_x] & wall_bit != 0
 
-    if (grid[y1][x1] & wall_bit != 0):
-        return (False)
-
-    return (True)
+    return (not has_wall)
 
 
 # *****************************************************************************
@@ -60,82 +49,46 @@ def find_way(grid: List[List[int]], start: Tuple[int, int],
         (-1, 0, 'W')
     ]
 
-    sx, sy = start
-    fx, fy = finish
+    start_x, start_y = start
+    finish_x, finish_y = finish
 
-    queue = deque([(sx, sy)])
+    frontier = deque([(start_x, start_y)])
+    position_to_parent = {(start_x, start_y): None}
+    position_to_direction = {(start_x, start_y): None}
 
-    visited = {(sx, sy): None}
+    while (frontier):
+        current_x, current_y = frontier.popleft()
 
-    parent_direction = {(sx, sy): None}
-
-    found = False
-
-    while queue and not found:
-        x, y = queue.popleft()
-
-        if (x, y) == (fx, fy):
-            found = True
+        if ((current_x, current_y) == (finish_x, finish_y)):
             break
 
-        for dx, dy, direction in directions:
-            nx, ny = x + dx, y + dy
+        for offset_x, offset_y, direction_name in directions:
+            next_x = current_x + offset_x
+            next_y = current_y + offset_y
+            next_position = (next_x, next_y)
 
-            if ((nx, ny) not in visited and neighbors(grid, x, y, nx,
-                                                      ny, width, height)):
+            is_unvisited = next_position not in position_to_parent
+            is_accessible = is_valid_neighbor(grid, current_x, current_y,
+                                              next_x, next_y, width, height)
 
-                visited[(nx, ny)] = (x, y)
-                parent_direction[(nx, ny)] = direction
-                queue.append((nx, ny))
+            if is_unvisited and is_accessible:
+                position_to_parent[next_position] = (current_x, current_y)
+                position_to_direction[next_position] = direction_name
+                frontier.append(next_position)
 
-    if not found:
+    finish_position = (finish_x, finish_y)
+    if (finish_position not in position_to_parent):
         return []
 
-    path = []
-    current = (fx, fy)
+    path_directions = []
+    current_position = finish_position
 
-    while current != (sx, sy):
-        parent = visited[current]
-        if parent is None:
-            break
-        direction = parent_direction[current]
-        path.append(direction)
-        current = parent
+    while (current_position != (start_x, start_y)):
+        parent_position = position_to_parent[current_position]
+        direction_to_parent = position_to_direction[current_position]
+        path_directions.append(direction_to_parent)
+        current_position = parent_position
 
-    path.reverse()
+    path_directions.reverse()
 
-    return path
-
-
-# =============================================================================
-# ============================== MAIN =========================================
-# =============================================================================
-
-# if __name__ == "__main__":
-
-#     grid = [
-#         [11,  9,  5,  3,  9,  1,  5,  5,  5,  7],
-#         [12,  6, 11, 10, 14, 12,  5,  5,  5,  3],
-#         [13,  5,  2, 12,  5,  5,  5,  5,  5,  2],
-#         [9,  3, 10,  9,  5,  1,  7,  9,  5,  6],
-#         [10, 12,  6, 10,  9,  6,  9,  6,  9,  3],
-#         [8,  5,  3, 10, 12,  3, 10,  9,  6, 10],
-#         [10, 11, 12,  6, 11, 12,  6, 10, 11, 10],
-#         [10,  8,  5,  3, 12,  5,  1,  6, 10, 10],
-#         [10, 12,  3, 12,  5,  3, 10, 11,  8,  6],
-#         [12,  5,  6, 13,  5,  4,  6, 12,  4,  7],
-
-#     ]
-
-#     width = height = 10
-
-#     start = (0, 0)
-#     finish = (9, 9)
-
-#     debug_display(grid, width, height, start, finish)
-#     way = find_way(grid, start, finish, width, height)
-#     print(f"Chemin trouvé: {way}")
-#     print(f"Longueur du chemin: {len(way)}")
-
-#     debug_display(grid, width, height, start, finish, (0, 0), way)
-#     print(way)
+    return (path_directions)

@@ -1,16 +1,3 @@
-#!/usr/bin/env python3
-# ########################################################################### #
-#   shebang: 1                                                                #
-#                                                          :::      ::::::::  #
-#   growing_tree.py                                      :+:      :+:    :+:  #
-#                                                      +:+ +:+         +:+    #
-#   By: bbeaurai <bbeaurai@student.42lehavre.fr>     +#+  +:+       +#+       #
-#                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/03/18 11:31:23 by bbeaurai            #+#    #+#            #
-#   Updated: 2026/03/27 13:56:46 by bbeaurai           ###   ########.fr      #
-#                                                                             #
-# ########################################################################### #
-
 
 from typing import Optional
 
@@ -123,27 +110,3 @@ def grow_tree(grid: list[list[int]], width: int, height: int,
 
     grid: list[list[int]] = print_fortytwo(grid, "after", width, height)
     return (grid)
-
-
-# =============================================================================
-# ============================== MAIN =========================================
-# =============================================================================
-
-# def main() -> None:
-#     # width = height = 5
-#     width = 10
-#     height = 10
-
-#     entry = (0, 0)
-#     finish = ((width - 1), (height - 1))
-
-#     grid = np.array([[15 for _ in range(width)] for _ in range(height)])
-
-#     grid = growing_tree(grid, width, height, entry, True, "")
-#     print(*grid, sep="\n")
-
-#     debug_display(grid, width, height, entry, finish, entry)
-
-
-# if __name__ == "__main__":
-#     main()
