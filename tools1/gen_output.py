@@ -16,8 +16,18 @@ def output(width, height, start: tuple[int], finish: tuple[int],
     grid = grow_tree(gr, width, height, start, perfect, seed)
     way = find_way(grid, start, finish, width, height)
 
-    entry = f"{start[0]},{start[1]}"
-    end = f"{finish[0]},{finish[1]}"
+    if (grid[start[1]][start[0]] == 15):
+        print("start deplace")
+        entry = f"{0},{0}"
+    else:
+        entry = f"{start[0]},{start[1]}"
+
+    if (grid[finish[1]][finish[0]] == 15):
+        print("finish deplace")
+        end = f"{height - 1},{width - 1}"
+    else:
+        end = f"{finish[0]},{finish[1]}"
+    print(end, start)
     try:
         with open(name_file, "w") as f:
             for y, row in enumerate(grid):  # rangee
