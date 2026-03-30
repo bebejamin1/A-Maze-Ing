@@ -83,6 +83,7 @@ def grow_tree(grid: list[list[int]], width: int, height: int,
 
     x: int = entry[0]
     y: int = entry[1]
+
     parkour: list[tuple[int, int]] = [(x, y)]
     mouv: list[str, tuple[int]] = {
         "N": (0, -1, 1, 4),
