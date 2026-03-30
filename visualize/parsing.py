@@ -4,7 +4,16 @@ from typing_extensions import Self
 from pydantic import (BaseModel, Field, field_validator, model_validator)
 
 
-def get_tuple(entry: str, exit_coord: str) -> List[Tuple[int]]:
+def get_tuple(entry: str, exit_coord: str) -> List[Tuple[int, int]]:
+    """Convert entry and exit coordinates strings into coordinate tuples.
+
+    Args:
+        entry: Entry coordinate as "x,y".
+        exit_coord: Exit coordinate as "x,y".
+
+    Returns:
+        A list containing entry and exit coordinates as tuples.
+    """
     ent_x, ent_y = map(int, entry.split(","))
     ext_x, ext_y = map(int, exit_coord.split(","))
 
@@ -12,6 +21,15 @@ def get_tuple(entry: str, exit_coord: str) -> List[Tuple[int]]:
 
 
 def maze_data_extract(file: str) -> Tuple[List[str], str, str, str]:
+    """Read a generated maze file and extract maze content and metadata.
+
+    Args:
+        file: Path to the maze output file.
+
+    Returns:
+        A tuple containing maze rows, entry coordinate, exit coordinate,
+        and path directions.
+    """
     try:
         with open(file, 'r', encoding="utf-8") as lines:
             all_lines = [line.strip() for line in lines if line.strip()]
@@ -36,6 +54,7 @@ def maze_data_extract(file: str) -> Tuple[List[str], str, str, str]:
 
 
 class MazeConfig(BaseModel):
+    """Validated configuration model for maze generation and rendering."""
     WIDTH: int = Field(gt=1, le=50)
     HEIGHT: int = Field(gt=1, le=50)
     ENTRY: str
@@ -46,7 +65,15 @@ class MazeConfig(BaseModel):
 
     @field_validator("ENTRY", "EXIT")
     @classmethod
-    def check_coordinates_format(cls, value) -> str:
+    def check_coordinates_format(cls, value: str) -> str:
+        """Validate that a coordinate uses the expected "x,y" format.
+
+        Args:
+            value: Coordinate string to validate.
+
+        Returns:
+            The validated coordinate string.
+        """
         if "," not in value:
             raise ValueError("Coordinates must be 'x,y' format")
         parts = value.split(",")
@@ -56,13 +83,26 @@ class MazeConfig(BaseModel):
 
     @field_validator("OUTPUT_FILE")
     @classmethod
-    def check_outputfile(cls, value) -> str:
+    def check_outputfile(cls, value: str) -> str:
+        """Validate output file extension.
+
+        Args:
+            value: Output file path.
+
+        Returns:
+            The validated output file path.
+        """
         if ".txt" not in value:
             raise ValueError("The file must be in .txt format")
         return value
 
     @model_validator(mode="after")
     def validate_maze(self) -> Self:
+        """Validate consistency and bounds of maze configuration fields.
+
+        Returns:
+            The validated model instance.
+        """
         x, y = map(int, self.ENTRY.split(","))
         x2, z2 = map(int, self.EXIT.split(","))
 
@@ -79,6 +119,14 @@ class MazeConfig(BaseModel):
 
 
 def extract_config(file_path: str) -> Dict[str, str]:
+    """Parse a key=value configuration file into a dictionary.
+
+    Args:
+        file_path: Path to the configuration file.
+
+    Returns:
+        Parsed configuration key/value pairs.
+    """
     config = {}
     try:
         with open(file_path, 'r', encoding="utf-8") as file:

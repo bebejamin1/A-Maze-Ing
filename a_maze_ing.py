@@ -16,10 +16,15 @@ if __name__ == "__main__":
 
     try:
         config_dict = extract_config(config_file)
-        config = MazeConfig(**config_dict)
-    except (ValueError, ValidationError) as e:
+        config = MazeConfig.model_validate(config_dict)
+    except (ValidationError) as e:
         print("\nExpected validation error:")
         print(e.errors()[0]["msg"])
+        print()
+        sys.exit()
+    except (ValueError) as e:
+        print("\nExpected validation error:")
+        print(e)
         print()
         sys.exit()
 
@@ -67,19 +72,10 @@ if __name__ == "__main__":
                            exit_coord)
             elif choice == 4:
                 print()
-                print("█████████████████████████████████████".center(70, " "))
-                print("███████▀█████████████████████████████".center(70, " "))
-                print("██████░░█████████████████████████████".center(70, " "))
-                print("█████▀░▄█████████████████████████████".center(70, " "))
-                print("█████░░▀▀▀▀▀███▀▀█████▀▀███▀▀▀▀▀█████".center(70, " "))
-                print("█████░░▄██▄░░███░░███░░███░░███░░████".center(70, " "))
-                print("████░░█████░░███░▄███░░██░░▀▀▀░▄█████".center(70, " "))
-                print("████░░████▀░███░░███▀░███░░██████████".center(70, " "))
-                print("████░░█▀▀░▄████▄░▀▀▀░▄███▄░▀▀▀░▄█████".center(70, " "))
-                print("█████▄▄▄███████████░░██████▄▄████████".center(70, " "))
-                print("██████████████░▀█▀░▄█████████████████".center(70, " "))
-                print("███████████████▄▄▄███████████████████".center(70, " "))
-                print("█████████████████████████████████████".center(70, " "))
+                print("  ✈︎ ✈︎ ✈︎ ✈︎ ✈︎ ✈︎ ✈︎".center(70, " "))
+                print("Goodbye !".center(66, " "))
+                print("  ✈︎ ✈︎ ✈︎ ✈︎ ✈︎ ✈︎ ✈︎".center(70, " "))
+
                 print()
                 sys.exit()
             else:

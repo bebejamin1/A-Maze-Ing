@@ -10,6 +10,20 @@ from typing import List, Tuple
 def is_valid_neighbor(grid: List[List[int]], current_x: int, current_y: int,
                       next_x: int, next_y: int,
                       width: int, height: int) -> bool:
+    """Check whether a candidate neighbor is reachable from current cell.
+
+    Args:
+        grid: Maze grid of encoded cell walls.
+        current_x: Current x-coordinate.
+        current_y: Current y-coordinate.
+        next_x: Candidate neighbor x-coordinate.
+        next_y: Candidate neighbor y-coordinate.
+        width: Maze width.
+        height: Maze height.
+
+    Returns:
+        True if the neighbor is in bounds and not blocked by a wall.
+    """
 
     is_within_bounds = 0 <= next_x < width and 0 <= next_y < height
     if (not is_within_bounds):
@@ -41,6 +55,18 @@ def is_valid_neighbor(grid: List[List[int]], current_x: int, current_y: int,
 
 def find_way(grid: List[List[int]], start: Tuple[int, int],
              finish: Tuple[int, int], width: int, height: int) -> List[str]:
+    """Find a path from start to finish using breadth-first search.
+
+    Args:
+        grid: Maze grid of encoded cell walls.
+        start: Start coordinate.
+        finish: Finish coordinate.
+        width: Maze width.
+        height: Maze height.
+
+    Returns:
+        Ordered list of direction letters from start to finish.
+    """
 
     directions = [
         (0, -1, 'N'),

@@ -1,8 +1,9 @@
 import os
 import random
 import time
-from typing import Dict, List, Tuple
+from typing import Dict, List, Set, Tuple
 from visualize.parsing import MazeConfig
+from visualize.utils import check_change
 
 
 COLORS = [
@@ -26,6 +27,14 @@ RESET = "\033[0m"
 
 
 def get_wall_color() -> str:
+    """Prompt the user to choose a wall color for rendering.
+
+    Returns:
+        ANSI color code selected by the user.
+
+    Raises:
+        ValueError: If the user input is outside the allowed range.
+    """
     print()
     print("Choose your color:")
     print(COLORS[0] + "1 - Red")
@@ -48,8 +57,18 @@ def get_wall_color() -> str:
                          "1 and 7")
 
 
-def decode_path(ent_x: int, ent_y: int, coord: List[str]) -> Tuple[int]:
-    path_coord = set()
+def decode_path(ent_x: int, ent_y: int, coord: str) -> Set[Tuple[int, int]]:
+    """Decode path directions into visited maze coordinates.
+
+    Args:
+        ent_x: Entry x-coordinate.
+        ent_y: Entry y-coordinate.
+        coord: Sequence of directions (N, E, S, W).
+
+    Returns:
+        Set of coordinates visited when traversing the direction string.
+    """
+    path_coord: Set[Tuple[int, int]] = set()
 
     for direction in coord:
         if direction == 'N':
@@ -67,6 +86,14 @@ def decode_path(ent_x: int, ent_y: int, coord: List[str]) -> Tuple[int]:
 
 
 def decode_walls(maze: str) -> Dict[str, bool]:
+    """Decode hex cell value into wall presence flags.
+
+    Args:
+        maze: Hexadecimal representation of a maze cell.
+
+    Returns:
+        Mapping from cardinal direction to wall presence.
+    """
 
     wall = int(maze, 16)
 
@@ -78,9 +105,20 @@ def decode_walls(maze: str) -> Dict[str, bool]:
     }
 
 
-def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
+def draw_walls(coord: List[str], config: 'MazeConfig', path: str,
                color: str, show_path: bool, entry: str,
                exit_coord: str) -> None:
+    """Render the maze in terminal with optional animated path display.
+
+    Args:
+        coord: Maze grid as hex-encoded rows.
+        config: Validated maze configuration.
+        path: Directions from entry to exit.
+        color: ANSI color code for walls.
+        show_path: Whether to display entry/exit/path markers.
+        entry: Entry coordinate as "x,y".
+        exit_coord: Exit coordinate as "x,y".
+    """
     ent_x, ent_y = map(int, entry.split(","))
     ext_x, ext_y = map(int, exit_coord.split(","))
 
@@ -127,9 +165,9 @@ def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
 
             print(wall * (config.WIDTH * 2 + 1))
 
-            if (config.WIDTH <= 11 or config.HEIGHT <= 9):
-                print("\n" + "To display the number 42, the minimum size "
-                      "required is 11x9" + "\n")
+            change = check_change(config, entry, exit_coord)
+            if change and show_path:
+                print(change)
 
             print("\nTo display the menu: Ctrl + C :)\n")
 

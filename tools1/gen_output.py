@@ -9,8 +9,20 @@ red = "\033[31m\033[5m\033[1m"
 reset = "\033[0m"
 
 
-def output(width, height, start: tuple[int], finish: tuple[int],
-           perfect: list[str], name_file: str, seed: Optional[Any]) -> None:
+def output(width: int, height: int, start: tuple[int, int],
+           finish: tuple[int, int], perfect: bool, name_file: str,
+           seed: Optional[Any]) -> None:
+    """Generate a maze, solve it, and write output data to a file.
+
+    Args:
+        width: Maze width.
+        height: Maze height.
+        start: Start coordinate.
+        finish: End coordinate.
+        perfect: Whether to generate a perfect maze.
+        name_file: Output file path.
+        seed: Optional random seed.
+    """
 
     gr = np.array([[15 for _ in range(width)] for _ in range(height)])
     grid = grow_tree(gr, width, height, start, perfect, seed)

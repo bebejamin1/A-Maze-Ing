@@ -10,6 +10,17 @@ import random
 
 def print_fortytwo(grid: list[list[int]], finish: str,
                    width: int, height: int) -> list[list[int]]:
+    """Write or clear the decorative 42 pattern in the maze grid.
+
+    Args:
+        grid: Maze grid.
+        finish: Phase marker, either "before" or "after".
+        width: Maze width.
+        height: Maze height.
+
+    Returns:
+        Updated maze grid.
+    """
 
     if (width >= 11 and height >= 9):
 
@@ -42,6 +53,18 @@ def print_fortytwo(grid: list[list[int]], finish: str,
 
 def look_neighbor(grid: list[list[int]], x1: int, y1: int,
                   w: int, h: int) -> list:
+    """Collect neighboring directions for defective maze generation.
+
+    Args:
+        grid: Maze grid.
+        x1: Current x-coordinate.
+        y1: Current y-coordinate.
+        w: Maze width.
+        h: Maze height.
+
+    Returns:
+        List of candidate movement directions.
+    """
 
     directions: list[tuple[Any]] = [(0, -1, "N"), (1, 0, "E"),
                                     (0, 1, "S"), (-1, 0, "W")]
@@ -70,6 +93,18 @@ def look_neighbor(grid: list[list[int]], x1: int, y1: int,
 def deficient_maze(grid: list[list[int]], width: int, height: int,
                    entry: tuple[int, int],
                    seed: Optional[str]) -> list[list[int]]:
+    """Generate an imperfect maze variant with occasional extra openings.
+
+    Args:
+        grid: Initial maze grid.
+        width: Maze width.
+        height: Maze height.
+        entry: Starting coordinate for generation.
+        seed: Optional random seed.
+
+    Returns:
+        Generated maze grid.
+    """
 
     if seed:
         random.seed(seed)

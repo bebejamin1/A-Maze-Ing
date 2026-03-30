@@ -14,6 +14,17 @@ from maze_algorithm.defective_maze import deficient_maze
 
 def print_fortytwo(grid: list[list[int]], finish: str,
                    width: int, height: int) -> list[list[int]]:
+    """Write or clear the decorative 42 pattern in the maze grid.
+
+    Args:
+        grid: Maze grid.
+        finish: Phase marker, either "before" or "after".
+        width: Maze width.
+        height: Maze height.
+
+    Returns:
+        Updated maze grid.
+    """
 
     width_int = int(width)
     height_int = int(height)
@@ -50,6 +61,18 @@ def print_fortytwo(grid: list[list[int]], finish: str,
 
 def look_neighbor(grid: list[list[int]], x1: int, y1: int,
                   w: int, h: int) -> list:
+    """Collect unvisited neighboring cells around the current position.
+
+    Args:
+        grid: Maze grid.
+        x1: Current x-coordinate.
+        y1: Current y-coordinate.
+        w: Maze width.
+        h: Maze height.
+
+    Returns:
+        List of available movement directions.
+    """
 
     x_axes: list[int] = [0, 1, 0, -1]
     y_axes: list[int] = [-1, 0, 1, 0]
@@ -73,6 +96,19 @@ def look_neighbor(grid: list[list[int]], x1: int, y1: int,
 def grow_tree(grid: list[list[int]], width: int, height: int,
               entry: tuple[int, int], perfect: bool,
               seed: Optional[str]) -> list[list[int]]:
+    """Generate a maze using the growing tree algorithm.
+
+    Args:
+        grid: Initial maze grid.
+        width: Maze width.
+        height: Maze height.
+        entry: Starting coordinate for generation.
+        perfect: Whether to generate a perfect maze.
+        seed: Optional random seed.
+
+    Returns:
+        Generated maze grid.
+    """
 
     if (perfect is False and width > 3 and height > 3):
         return (deficient_maze(grid, width, height, entry, seed))
