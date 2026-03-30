@@ -14,20 +14,26 @@ def output(width, height, start: tuple[int], finish: tuple[int],
 
     gr = np.array([[15 for _ in range(width)] for _ in range(height)])
     grid = grow_tree(gr, width, height, start, perfect, seed)
-    way = find_way(grid, start, finish, width, height)
 
     if (grid[start[1]][start[0]] == 15):
-        print("start deplace")
         entry = f"{0},{0}"
+        sx = sy = 0
     else:
         entry = f"{start[0]},{start[1]}"
+        sx, sy = start
 
     if (grid[finish[1]][finish[0]] == 15):
-        print("finish deplace")
         end = f"{height - 1},{width - 1}"
+        fx = height - 1
+        fy = width - 1
     else:
         end = f"{finish[0]},{finish[1]}"
-    print(end, start)
+        fx = finish[0]
+        fy = finish[1]
+
+    way = find_way(grid, (sx, sy), (fx, fy), width, height)
+
+    print(way)
     try:
         with open(name_file, "w") as f:
             for y, row in enumerate(grid):  # rangee

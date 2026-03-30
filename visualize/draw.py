@@ -79,9 +79,10 @@ def decode_walls(maze: str) -> Dict[str, bool]:
 
 
 def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
-               color: str, show_path: bool) -> None:
-    ent_x, ent_y = map(int, config.ENTRY.split(","))
-    ext_x, ext_y = map(int, config.EXIT.split(","))
+               color: str, show_path: bool, entry: str,
+               exit_coord: str) -> None:
+    ent_x, ent_y = map(int, entry.split(","))
+    ext_x, ext_y = map(int, exit_coord.split(","))
 
     try:
         while True:

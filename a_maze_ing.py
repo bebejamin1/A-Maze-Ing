@@ -48,7 +48,8 @@ if __name__ == "__main__":
                        config.PERFECT, config.OUTPUT_FILE, config.SEED)
                 maze, entry, exit_coord, path = maze_data_extract(
                     config.OUTPUT_FILE)
-                draw_walls(maze, config, path, wall_color, show_path)
+                draw_walls(maze, config, path, wall_color, show_path, entry,
+                           exit_coord)
             elif choice == 2:
                 if show_path is False:
                     show_path = True
@@ -56,14 +57,14 @@ if __name__ == "__main__":
                     show_path = False
                 maze, entry, exit_coord, path = maze_data_extract(
                     config.OUTPUT_FILE)
-                maze, entry, exit_coord, path = maze_data_extract(
-                    config.OUTPUT_FILE)
-                draw_walls(maze, config, path, wall_color, show_path)
+                draw_walls(maze, config, path, wall_color, show_path, entry,
+                           exit_coord)
             elif choice == 3:
                 wall_color = get_wall_color()
                 maze, entry, exit_coord, path = maze_data_extract(
                     config.OUTPUT_FILE)
-                draw_walls(maze, config, path, wall_color, show_path)
+                draw_walls(maze, config, path, wall_color, show_path, entry,
+                           exit_coord)
             elif choice == 4:
                 print()
                 print("█████████████████████████████████████".center(70, " "))
