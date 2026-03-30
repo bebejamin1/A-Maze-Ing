@@ -4,6 +4,8 @@ PIP = ./venv/bin/pip
 FLAKE8 = venv/lib/python3.10/site-packages/flake8
 MYPY = venv/lib/python3.10/site-packages/mypy
 PYDANTIC = venv/lib/python3.10/site-packages/pydantic
+NUMPY = venv/lib/python3.10/site-packages/numpy
+TYPING = venv/lib/python3.10/site-packages/typing-extensions
 
 all : run
 
@@ -16,10 +18,16 @@ $(FLAKE8) :
 $(MYPY) : 
 	$(PIP) install -r requirement.txt
 
-$(PYDANTIC) : 
+$(PYDANTIC) :
 	$(PIP) install -r requirement.txt
 
-install : venv/bin/activate  requirement.txt $(FLAKE8) $(MYPY) $(PYDANTIC)
+$(NUMPY) :
+	$(PIP) install -r requirement.txt
+
+$(TYPING) :
+	$(PIP) install -r requirement.txt
+
+install : venv/bin/activate  requirement.txt $(FLAKE8) $(MYPY) $(PYDANTIC) $(NUMPY) $(TYPING)
 
 
 run : install

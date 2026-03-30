@@ -1,6 +1,6 @@
 import sys
 from pydantic import ValidationError
-from visualize.draw import draw_walls
+from visualize.draw import draw_walls, get_wall_color
 from visualize.parsing import maze_data_extract, get_tuple, extract_config
 from visualize.parsing import MazeConfig
 from tools1.gen_output import output
@@ -32,6 +32,7 @@ if __name__ == "__main__":
 
     print('\033[43m  WELCOME !  \033[0m'.center(68, " "))
     show_path = False
+    wall_color = "\033[37m"
     while True:
         print()
         print("1 - Re-generate a new maze")
@@ -47,7 +48,7 @@ if __name__ == "__main__":
                        config.PERFECT, config.OUTPUT_FILE, config.SEED)
                 maze, entry, exit_coord, path = maze_data_extract(
                     config.OUTPUT_FILE)
-                draw_walls(maze, config, path, False, show_path)
+                draw_walls(maze, config, path, wall_color, show_path)
             elif choice == 2:
                 if show_path is False:
                     show_path = True
@@ -55,12 +56,12 @@ if __name__ == "__main__":
                     show_path = False
                 maze, entry, exit_coord, path = maze_data_extract(
                     config.OUTPUT_FILE)
-                draw_walls(maze, config, path, False, show_path)
+                draw_walls(maze, config, path, wall_color, show_path)
             elif choice == 3:
-                color = True
+                wall_color = get_wall_color()
                 maze, entry, exit_coord, path = maze_data_extract(
                     config.OUTPUT_FILE)
-                draw_walls(maze, config, path, color, show_path)
+                draw_walls(maze, config, path, wall_color, show_path)
             elif choice == 4:
                 print()
                 print("█████████████████████████████████████".center(70, " "))

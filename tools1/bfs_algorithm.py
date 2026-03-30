@@ -8,8 +8,8 @@ from typing import List, Tuple
 # *              Check to see if any neighbors are around                     *
 
 def is_valid_neighbor(grid: List[List[int]], current_x: int, current_y: int,
-                       next_x: int, next_y: int,
-                       width: int, height: int) -> bool:
+                      next_x: int, next_y: int,
+                      width: int, height: int) -> bool:
 
     is_within_bounds = 0 <= next_x < width and 0 <= next_y < height
     if (not is_within_bounds):

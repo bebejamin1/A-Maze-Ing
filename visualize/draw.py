@@ -79,14 +79,9 @@ def decode_walls(maze: str) -> Dict[str, bool]:
 
 
 def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
-               color: bool, show_path: bool) -> None:
+               color: str, show_path: bool) -> None:
     ent_x, ent_y = map(int, config.ENTRY.split(","))
     ext_x, ext_y = map(int, config.EXIT.split(","))
-
-    if color is True:
-        color = get_wall_color()
-    else:
-        color = "\033[37m"
 
     try:
         while True:
@@ -111,7 +106,7 @@ def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
                     mid_line += wall if walls["W"] else "  "
 
                     if x == ent_x and y == ent_y and show_path:
-                        mid_line += "🟩"
+                        mid_line += "​🚀"
                     elif x == ext_x and y == ext_y and show_path:
                         mid_line += "🏁"
                     elif hexa.upper() == "F":

@@ -1,8 +1,7 @@
-#key=value format
 WIDTH=20
-HEIGHT=20
+OUTPUT_FILE=.txt
 ENTRY=0,0
 EXIT=14,10
-OUTPUT_FILE=maze.txt
-PERFECT=True
+HEIGHT=20
+PERFECT=true
 SEED=
