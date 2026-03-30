@@ -126,6 +126,10 @@ def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
 
             print(wall * (config.WIDTH * 2 + 1))
 
+            if (config.WIDTH <= 11 or config.HEIGHT <= 9):
+                print("\n" + "To display the number 42, the minimum size "
+                      "required is 11x9" + "\n")
+
             print("\nTo display the menu: Ctrl + C :)\n")
 
             time.sleep(0.2)
