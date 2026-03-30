@@ -56,6 +56,8 @@ if __name__ == "__main__":
                     show_path = False
                 maze, entry, exit_coord, path = maze_data_extract(
                     config.OUTPUT_FILE)
+                maze, entry, exit_coord, path = maze_data_extract(
+                    config.OUTPUT_FILE)
                 draw_walls(maze, config, path, wall_color, show_path)
             elif choice == 3:
                 wall_color = get_wall_color()

@@ -106,7 +106,7 @@ def draw_walls(coord: List[str], config: 'MazeConfig', path: List[str],
                     mid_line += wall if walls["W"] else "  "
 
                     if x == ent_x and y == ent_y and show_path:
-                        mid_line += "​🚀"
+                        mid_line += "🟢"
                     elif x == ext_x and y == ext_y and show_path:
                         mid_line += "🏁"
                     elif hexa.upper() == "F":

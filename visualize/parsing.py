@@ -66,6 +66,8 @@ class MazeConfig(BaseModel):
         x, y = map(int, self.ENTRY.split(","))
         x2, z2 = map(int, self.EXIT.split(","))
 
+        if (x, y) == (x2, z2):
+            raise ValueError("ENTRY and EXIT cannot have the same coordinates")
         if self.WIDTH * self.HEIGHT < 4:
             raise ValueError("Maze dimensions must be at least 2x2.")
         if not (0 <= x < self.WIDTH and 0 <= y < self.HEIGHT):
