@@ -80,10 +80,11 @@ Après cela, make lance python3 a-maze-ing config.txt
 ### Développement
 
 ```bash
+make install       # Installer les dépendances
 make lint          # Vérifier le code avec flake8 et mypy
+make lint-strict   # Vérifier le code avec flake8 et mypy en mode strict
 make debug         # Lancer en mode débogage
 make clean         # Nettoyer les fichiers __pycache__
-make install       # Installer les dépendances
 ```
 
 ---
