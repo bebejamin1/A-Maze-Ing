@@ -113,20 +113,28 @@ SEED=                 # Graine aléatoire (optionnel)
 
 ```
 A-MAZE-ING/
-├── a_maze_ing.py           # Fichier principal
-├── config.txt              # Configuration
-├── maze.txt                # Sortie du labyrinthe
 ├── maze_algorithm/
-│   ├── maze.py             # Classe de base MazeGenerator
-│   ├── growing_tree.py     # Algorithme Growing Tree
-│   └── defective_maze.py   # Génération de labyrinthes imparfaits
+│   ├── __init__.py             # Rend le dossier importable
+│   ├── maze.py                 # Classe de base MazeGenerator (à créer/renommer)
+│   ├── growing_tree.py         # Algorithme Growing Tree
+│   └── defective_maze.py       # Génération de labyrinthes imparfaits
 ├── tools1/
-│   ├── bfs_algorithm.py    # Algorithme BFS pour trouver le chemin
-│   └── gen_output.py       # Génération de fichiers de sortie
-└── visualize/
-    ├── draw.py             # Affichage ASCII du labyrinthe
-    ├── parsing.py          # Parsing des configurations
-    └── utils.py            # Utilitaires
+│   ├── __init__.py             # Rend le dossier importable
+│   ├── bfs_algorithm.py        # Algorithme BFS pour trouver le chemin
+│   └── gen_output.py           # Génération de fichiers de sortie
+├── visualize/
+│   ├── __init__.py             # Rend le dossier importable
+│   ├── draw.py                 # Affichage ASCII du labyrinthe
+│   ├── parsing.py              # Parsing des configurations
+│   └── utils.py                # Utilitaires
+├── .gitignore                  # Exclusion des fichiers inutiles (__pycache__, .whl)
+├── a_maze_ing.py               # Fichier principal (Point d'entrée)
+├── config.txt                  # Fichier de configuration par défaut
+├── Makefile                    # Automatisation (build, clean, test)
+├── maze.txt                    # Fichier de sortie (généré par le programme)
+├── pyproject.toml              # Configuration du packaging et des dépendances
+├── README.md                   # Documentation du projet
+└── requirement.txt             # Liste des bibliothèques Python
 ```
 
 **À COMPLÉTER** : Ajoutez des explications pour chaque module si nécessaire.
