@@ -1,8 +1,10 @@
+This project has been created as part of the 42 curriculum by bbeaurai, fcaval
+
 # 🏰 A-MAZE-ING
 
 ## 👥 Auteurs
 
-This project has been created as part of the 42 curriculum by Fleur Caval 🌸 and Benjamin Beaurain 🥕.
+Ce projet a été créé dans le cadre du programme 42 par Fleur Caval 🌸 et Benjamin Beaurain 🥕.
 
 ## Description
 
