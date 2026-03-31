@@ -6,17 +6,17 @@ This project has been created as part of the 42 curriculum by bbeaurai, fcaval
 
 Ce projet a été créé dans le cadre du programme 42 par Fleur Caval 🌸 et Benjamin Beaurain 🥕.
 
-## Description
+## 📝​ Description
 
 Un générateur de labyrinthes interactif en Python utilisant l'algorithme Growing Tree. Le programme génère des labyrinthes parfaits ou imparfaits et permet de visualiser le chemin de l'entrée à la sortie.
 
-## Rôles
+## 🪼​ Rôles
 
 Benjamin Beaurain : Implémentation de l'algorithme Growing Tree et logique des labyrinthes imparfaits.
 
 Fleur Caval : Système de configuration, interface utilisateur (menu) et visualisation ASCII.
 
-### Rétrospective
+### 🔥 Rétrospective
 * **Planning** : Initialement prévu sur 2 semaines, nous avons respecté notre délai personnel. Bien que nous avons dû laisser les bonus de côté.
 * **Améliorations** : une visualisation MLX a été envisagé pour un meilleur rendu visuel. Mais celui ci a été abandonné pour le débuggage plus efficace de l'ASCII.
 
