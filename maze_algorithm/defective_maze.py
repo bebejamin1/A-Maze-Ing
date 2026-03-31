@@ -112,9 +112,14 @@ class Deficient():
 
                     virgin_neighbor.append(c)
 
-                elif (grid[ny][nx] != -42 and random.random() < 0.08):
+                elif (grid[ny][nx] != -42):
 
-                    virgin_neighbor.append(c)
+                    if (self.width * self.height <= 10
+                            and random.random() < 0.35):
+                        virgin_neighbor.append(c)
+
+                    elif (random.random() < 0.08):
+                        virgin_neighbor.append(c)
 
         return (virgin_neighbor)
 
