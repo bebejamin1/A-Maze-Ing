@@ -2,16 +2,14 @@
 
 ## Description
 
-**À COMPLÉTER** : Écrivez une description du projet ici (2-3 lignes).
-
-Exemple : Un générateur de labyrinthes interactif en Python utilisant l'algorithme Growing Tree. Le programme génère des labyrinthes parfaits ou imparfaits et permet de visualiser le chemin de l'entrée à la sortie.
+Un générateur de labyrinthes interactif en Python utilisant l'algorithme Growing Tree. Le programme génère des labyrinthes parfaits ou imparfaits et permet de visualiser le chemin de l'entrée à la sortie.
 
 ---
 
 ## 📋 Table des matières
 
-- [Fonctionnalités](#fonctionnalités)
-- [Installation](#installation)
+- [Fonctionnalités](##fonctionnalités)
+- [Installation](##installation)
 - [Utilisation](#utilisation)
 - [Configuration](#configuration)
 - [Architecture](#architecture)
