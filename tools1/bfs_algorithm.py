@@ -22,8 +22,8 @@ def is_valid_neighbor(grid: list[list[int]], x: int, y: int,
     Returns:
         True if the neighbor is valid and accessible, False otherwise.
     """
-    if not (0 <= nx < w and 0 <= ny < h):
-        return False
+    if (not (0 <= nx < w and 0 <= ny < h)):
+        return (False)
 
     dx: int = nx - x
     dy: int = ny - y
@@ -37,7 +37,7 @@ def is_valid_neighbor(grid: list[list[int]], x: int, y: int,
 
     wall_bit: int = bits.get((dx, dy), 0)
 
-    return (grid[y][x] & wall_bit) == 0
+    return ((grid[y][x] & wall_bit) == 0)
 
 
 def find_way(grid: list[list[int]], start: Coords,
@@ -69,11 +69,11 @@ def find_way(grid: list[list[int]], start: Coords,
     ]
 
     head: int = 0
-    while head < len(queue):
+    while (head < len(queue)):
         curr: Coords = queue[head]
         head += 1
 
-        if curr == finish:
+        if (curr == finish):
             break
 
         curr_x, curr_y = curr
@@ -81,21 +81,21 @@ def find_way(grid: list[list[int]], start: Coords,
             nx, ny = curr_x + dx, curr_y + dy
             neighbor: Coords = (nx, ny)
 
-            if neighbor not in path_data and is_valid_neighbor(grid, curr_x,
+            if (neighbor not in path_data and is_valid_neighbor(grid, curr_x,
                                                                curr_y, nx, ny,
-                                                               width, height):
+                                                               width, height)):
                 path_data[neighbor] = (curr, name)
                 queue.append(neighbor)
 
-    if finish not in path_data:
+    if (finish not in path_data):
         return []
 
     path: list[str] = []
     current_pos: Coords | None = finish
 
-    while current_pos is not None and current_pos != start:
+    while (current_pos is not None and current_pos != start):
         parent, direction = path_data[current_pos]
         path.append(direction)
         current_pos = parent
 
-    return path[::-1]
+    return (path[::-1])
