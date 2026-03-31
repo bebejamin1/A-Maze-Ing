@@ -214,10 +214,17 @@ A-MAZE-ING/
 
 ## 🧮 Algorithmes
 
-### Growing Tree (Croissance d'arbre)
-<img width="3000" height="2000" alt="1036 8" src="https://github.com/user-attachments/assets/160e18a4-819a-4801-b2f9-5ef0eb3fabe1" />
+### Intergration 42 patterns
 
-Regarder l'algorithme: https://weblog.jamisbuck.org/2011/1/27/maze-generation-growing-tree-algorithm
+<img width="3000" height="2000" alt="42patern" src="https://github.com/user-attachments/assets/eeb3b248-880f-4e96-b2a9-a0c0b6578380" />
+
+### Patterns des cellules
+
+<img width="3000" height="2000" alt="grille" src="https://github.com/user-attachments/assets/617de130-5c3c-412c-9a85-169eed5546f8" />
+
+### Growing Tree (Croissance d'arbre)
+
+<img width="3000" height="2000" alt="1036 8" src="https://github.com/user-attachments/assets/160e18a4-819a-4801-b2f9-5ef0eb3fabe1" />
 
 Choix : cet algorithme a été choisi pour sa flexibilité et pour la qualité "organique" des labyrinthes produits. Nous l'avons trouvé inspirant. 
 
@@ -282,7 +289,8 @@ L'IA a été utilisé pour aider dans la réalisation des docsting et des typing
 
 ## ​​📚 Ressources
 
-Growing tree: https://weblog.jamisbuck.org/2011/1/27/maze-generation-growing-tree-algorithm bfs: https://www.datacamp.com/tutorial/breadth-first-search-in-python
+Growing tree: https://weblog.jamisbuck.org/2011/1/27/maze-generation-growing-tree-algorithm
+bfs: https://www.datacamp.com/tutorial/breadth-first-search-in-python
 Compréhension binaire affichage : https://stackoverflow.com/questions/57610416/how-to-read-a-maze-from-an-image-and-convert-it-to-binary-values-in-python + https://realpython.com/videos/python-maze-binary-file/
 Couleurs ASCII : https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
 Dessin ASCII Pacman : https://www.asciiart.eu/art/a7c9e36489bc23e9
