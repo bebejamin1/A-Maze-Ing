@@ -1,7 +1,0 @@
-*.pdf
-__pycache__/
-*.txt
-venv
-.vscode
-!config.txt
-!requirement.txt
