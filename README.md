@@ -99,35 +99,42 @@ make clean         # Nettoyer les fichiers __pycache__
 Lors du lancement, vous verrez le menu suivant :
 
 ```
-1 - Re-generate a new maze
-2 - Show/Hide path from entry to exit
-3 - Rotate maze colors
-4 - Quit
+1 - Show a maze
+2 - Re-generate a new maze
+3 - Show/Hide path from entry to exit
+4 - Rotate maze colors
+5 - Quit
 ```
 
-1. **Re-generate a new maze**
+1. **Show a maze**
    ```bash
    1
+   Montre le labyrinthe.
+   ```
+
+2. **Re-generate a new maze**
+   ```bash
+   2
    Génère un nouveau labyrinthe. Si la seed est remplie, le labyrinthe restera le même que généré     au début
    ```
 
-2. **Show/Hide path from entry to exit**
+3. **Show/Hide path from entry to exit**
    ```bash
-   2
+   3
    Montre le chemin entre l'entrée et la sortie. L'entrée est caractérisé par "🟢". La sortie par     "🏁". Le chemin quant à lui par "⭐".
    Le mode d'affichage choisi reste actif dans les autres fonctionnalités.
    Si l'entrée ou la sortie se trouve sur l'affichage du 42, ils seront déplacés.
    ```
 
-3. **Rotate maze colors**
+4. **Rotate maze colors**
    ```bash
-   3
+   4
    Permet de changer la couleur des murs du labyrinthe. Le menu affiche les 7 couleurs                disponibles. Par défaut, au lancement, le labyrinthe est blanc. Si la couleur est changée, elle    persistera dans les autres paramètres.
    ```
    
-4. **Quit**
+5. **Quit**
    ```bash
-   4
+   5
    Quitte le programme.
    ```
 
