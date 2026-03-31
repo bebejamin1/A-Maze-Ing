@@ -6,11 +6,26 @@ import random
 
 
 class GrowTree():
+    """Generate a perfect maze using the growing tree algorithm.
+
+    A perfect maze has exactly one path between any two points and no loops.
+    Uses the growing tree algorithm to generate such mazes.
+    """
 
     def __init__(self, width: int, height: int,
                  entry: tuple[int, int], finish: tuple[int, int],
                  perfect: bool, seed: Any | None) -> None:
+        """Initialize a perfect maze generator using growing tree algorithm.
 
+        Args:
+            width: Width of the maze grid.
+            height: Height of the maze grid.
+            entry: Tuple (x, y) of the entry point.
+            finish: Tuple (x, y) of the exit point.
+            perfect: Boolean flag (True for perfect maze).
+            seed: Random seed for reproducible maze generation. If None, uses
+            random.
+        """
         self.width = width
         self.height = height
         self.entry = entry
@@ -24,7 +39,18 @@ class GrowTree():
 
     def print_fortytwo(self, grid: list[list[int]],
                        state: str) -> list[list[int]]:
+        """Mark or unmark grid cells to display a "42" pattern.
 
+        Before maze generation, sets cells to -1 to create a 42 pattern.
+        After maze generation, converts -1 cells back to normal cells (15).
+
+        Args:
+            grid: 2D list representing the maze grid.
+            state: Either "before" to mark cells or "after" to unmark them.
+
+        Returns:
+            Modified grid with the 42 pattern applied or removed.
+        """
         width_int: int = int(self.width)
         height_int: int = int(self.height)
 
@@ -56,8 +82,22 @@ class GrowTree():
 # *                          look_neighbor()                                  *
 # *           Check which tile is empty or break a random wall                *
 
-    def look_neighbor(self, grid: list[list[int]], x1, y1) -> list:
+    def look_neighbor(self, grid: list[list[int]], x1: int,
+                      y1: int) -> list[str]:
+        """Find unvisited neighboring cells.
 
+        Checks all four cardinal directions from the current cell and returns
+        the directions of unvisited cells (with value 15).
+
+        Args:
+            grid: 2D list representing the maze grid.
+            x1: Current cell x-coordinate.
+            y1: Current cell y-coordinate.
+
+        Returns:
+            List of direction strings ('N', 'E', 'S', 'W') of unvisited
+            neighbors.
+        """
         x_axes: list[int] = [0, 1, 0, -1]
         y_axes: list[int] = [-1, 0, 1, 0]
         compass: list[str] = ["N", "E", "S", "W"]
@@ -77,8 +117,20 @@ class GrowTree():
 # *                            base growin_tree()                             *
 # *     générer un labyrinthe à l'aide de l'algorithme « growing tree »       *
 
-    def maze(self, grid_start) -> list[list[int]]:
+    def maze(self, grid_start: list[list[int]]) -> list[list[int]]:
+        """Generate a complete perfect maze using the growing tree algorithm.
 
+        Implements the growing tree algorithm to create a perfect maze with
+        exactly one path between any two cells. Includes a "42" pattern
+        decoration if the maze is large enough.
+
+        Args:
+            grid_start: 2D list representing the initial maze grid (all cells
+            set to 15).
+
+        Returns:
+            2D list containing the generated perfect maze with wall bits.
+        """
         if (self.seed):
             random.seed(self.seed)
 

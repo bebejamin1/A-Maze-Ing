@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     coord = get_tuple(config.ENTRY, config.EXIT)
     output(config.WIDTH, config.HEIGHT, coord[0], coord[1],
-    config.PERFECT, config.OUTPUT_FILE, config.SEED)
+           config.PERFECT, config.OUTPUT_FILE, config.SEED)
     maze, entry, exit_coord, path = maze_data_extract(
                     config.OUTPUT_FILE)
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
                                ": "))
 
             if choice == 1:
-               draw_walls(maze, config, path, wall_color, show_path, entry,
+                draw_walls(maze, config, path, wall_color, show_path, entry,
                            exit_coord)
             elif choice == 2:
                 coord = get_tuple(config.ENTRY, config.EXIT)
@@ -67,7 +67,7 @@ if __name__ == "__main__":
                 maze, entry, exit_coord, path = maze_data_extract(
                     config.OUTPUT_FILE)
                 draw_walls(maze, config, path, wall_color, show_path, entry,
-                                       exit_coord)
+                           exit_coord)
             elif choice == 3:
                 if show_path is False:
                     show_path = True

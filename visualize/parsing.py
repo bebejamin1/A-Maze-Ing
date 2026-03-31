@@ -92,8 +92,10 @@ class MazeConfig(BaseModel):
         Returns:
             The validated output file path.
         """
-        if ".txt" not in value:
+        if not value.endswith(".txt"):
             raise ValueError("The file must be in .txt format")
+        if value.count(".txt") > 1:
+            raise ValueError("There can't be two “.txt” files")
         return value
 
     @model_validator(mode="after")

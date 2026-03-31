@@ -5,11 +5,25 @@ import random
 
 
 class Deficient():
+    """Generate a deficient (imperfect) maze with loops.
+
+    A deficient maze is a maze that has loops and multiple paths between
+    start and finish points, unlike a perfect maze which has exactly one path.
+    """
 
     def __init__(self, width: int, height: int,
                  entry: tuple[int, int], finish: tuple[int, int],
                  perfect: bool, seed: Any | str) -> None:
+        """Initialize a deficient maze generator.
 
+        Args:
+            width: Width of the maze grid.
+            height: Height of the maze grid.
+            entry: Tuple (x, y) of the entry point.
+            finish: Tuple (x, y) of the exit point.
+            perfect: Boolean flag (False for deficient maze).
+            seed: Random seed for reproducible maze generation.
+        """
         self.width = width
         self.height = height
         self.entry = entry
@@ -23,7 +37,18 @@ class Deficient():
 
     def print_fortytwo(self, grid: list[list[int]],
                        state: str) -> list[list[int]]:
+        """Mark or unmark grid cells to display a "42" pattern.
 
+        Before maze generation, sets cells to -42 to create a 42 pattern.
+        After maze generation, converts -42 cells back to normal cells (15).
+
+        Args:
+            grid: 2D list representing the maze grid.
+            state: Either "before" to mark cells or "after" to unmark them.
+
+        Returns:
+            Modified grid with the 42 pattern applied or removed.
+        """
         if (self.width >= 11 and self.height >= 9):
 
             w: int = int(round(((self.width - 7) / 2), 0))
@@ -52,8 +77,23 @@ class Deficient():
 # *                          look_neighbor()                                  *
 # *           Check which tile is empty or break a random wall                *
 
-    def look_neighbor(self, grid: list[list[int]], x1: int, y1: int) -> list:
+    def look_neighbor(self, grid: list[list[int]], x1: int,
+                      y1: int) -> list[str]:
+        """Find available neighbors to visit or walls to break.
 
+        Checks all four cardinal directions from the current cell. Returns
+        unvisited neighbors (value 15) and potentially includes broken walls
+        with a small probability (8% chance).
+
+        Args:
+            grid: 2D list representing the maze grid.
+            x1: Current cell x-coordinate.
+            y1: Current cell y-coordinate.
+
+        Returns:
+            List of direction strings ('N', 'E', 'S', 'W') of available
+            neighbors.
+        """
         directions: list[tuple[int, int, str]] = [(0, -1, "N"), (1, 0, "E"),
                                                   (0, 1, "S"), (-1, 0, "W")]
         virgin_neighbor: list[str] = []
@@ -79,7 +119,16 @@ class Deficient():
 # *                             if maze 2*2                                   *
 
     def min_maze(self, grid: list[list[int]]) -> list[list[int]]:
+        """Generate a minimal 2x2 maze.
 
+        Hardcodes the cell values for a 2x2 maze (the smallest possible maze).
+
+        Args:
+            grid: 2D list representing the maze grid (must be 2x2).
+
+        Returns:
+            Grid with the minimal 2x2 maze pattern.
+        """
         grid[0][0] = 9
         grid[0][1] = 3
         grid[1][1] = 6
@@ -92,7 +141,18 @@ class Deficient():
 # *       Generate the deficient maze algorithm for perfect = false           *
 
     def maze(self, grid_start: list[list[int]]) -> list[list[int]]:
+        """Generate a complete deficient maze.
 
+        Uses a depth-first search algorithm with recursive backtracking to
+        generate a deficient maze. Includes a "42" pattern decoration if
+        the maze is large enough.
+
+        Args:
+            grid_start: 2D list representing the initial maze grid.
+
+        Returns:
+            2D list containing the generated deficient maze with wall bits.
+        """
         if (self.height == 2 and self.width == 2):
             return (self.min_maze(grid_start))
 

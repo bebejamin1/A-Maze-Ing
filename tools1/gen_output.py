@@ -10,9 +10,30 @@ red = "\033[31m\033[5m\033[1m"
 reset = "\033[0m"
 
 
-def output(width, height, start: tuple[int, int], finish: tuple[int, int],
+def output(width: int, height: int, start: tuple[int, int],
+           finish: tuple[int, int],
            perfect: bool, name_file: str, seed: Any | None) -> None:
+    """Generate a maze and output it to a file with path solution.
 
+    Creates a maze using the specified algorithm (perfect or deficient), finds
+    a path from start to finish using BFS, and writes the result to a file in
+    hexadecimal format with entry, exit, and path information.
+
+    Args:
+        width: Width of the maze grid.
+        height: Height of the maze grid.
+        start: Tuple (x, y) of the entry point.
+        finish: Tuple (x, y) of the exit point.
+        perfect: If True, generate perfect maze (no loops). If False, generate
+                 deficient maze (with loops).
+        name_file: Path to the output file to write the maze data.
+        seed: Random seed for reproducible maze generation. If None, uses
+        random initialization.
+
+    Raises:
+        ValueError: If maze generation fails.
+        AttributeError: If invalid attribute access occurs.
+    """
     maze_gen: Union[GrowTree, Deficient]
 
     if (perfect):
