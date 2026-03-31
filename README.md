@@ -243,6 +243,8 @@ Explication de l'algorithme Growing Tree en détail:
 ---
 
 ### Recherche du chemin (BFS)
+![bfs-gif](https://github.com/user-attachments/assets/b721a985-2e0a-4488-b9f5-8cf6f77b71a7)
+
 
 Explication de l'algorithme BFS (Breadth-First Search) en détail:
 
