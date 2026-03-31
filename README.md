@@ -296,6 +296,21 @@ SESEESSWSSWWSWSEEESWSSWNWSSSENESENEENNNWNENWNENESS....
 ```
 ---
 
+## 📂​ Fichier .whl
+
+1. **Installer l'outil de build :**
+```bash
+python3 -m pip install --upgrade build
+```
+
+2. **Lancer la construction :**
+```bash
+python3 -m build
+```
+3. **Installer le paquet :**
+```bash
+pip install dist/mazer-1.2.3-py3-none-any.whl
+```
 ## 🩼 Utilisation de l'IA
 
 L'IA a été utilisé pour aider dans la réalisation des docsting et des typing, ainsi que pour générer le squelette de ce README.md. Dans certains cas, elle a pu être utilisé pour débugger. 
