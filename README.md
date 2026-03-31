@@ -10,9 +10,9 @@ Un générateur de labyrinthes interactif en Python utilisant l'algorithme Growi
 
 - [Fonctionnalités](##fonctionnalités)
 - [Installation](##installation)
-- [Utilisation](#utilisation)
-- [Configuration](#configuration)
-- [Architecture](#architecture)
+- [Utilisation](##utilisation)
+- [Configuration](##configuration)
+- [Architecture](##architecture)
 - [Algorithmes](#algorithmes)
 - [Auteurs](#auteurs)
 
@@ -36,8 +36,10 @@ Un générateur de labyrinthes interactif en Python utilisant l'algorithme Growi
 
 ### Prérequis
 
+```bash
 - Python 3.10+
 - pip ou venv
+```
 
 ### Étapes
 
@@ -137,8 +139,6 @@ A-MAZE-ING/
 └── requirement.txt             # Liste des bibliothèques Python
 ```
 
-**À COMPLÉTER** : Ajoutez des explications pour chaque module si nécessaire.
-
 ---
 
 ## 🧮 Algorithmes
@@ -177,43 +177,36 @@ make install       # Installer les dépendances
 
 ## 📊 Format de sortie
 
-Le fichier de sortie `maze.txt` contient **À COMPLÉTER** : Décrivez le format du fichier de sortie (exemple : format binaire, format texte, etc.).
+Le fichier de sortie `maze.txt` contient: l'hexadécimal du labyrinthe avec l'entrée, la sortie et le chemin de résolution du labyrinthe
+```
+d5513913953951555553
+9552eaaac3c6ba95553e
+ad5696ac3c392ac553c3
+83956969696eac513c3a
+aac396ba96914396e96a
+ac52ab86abaad2a956ba
+abbeac47ac2c3ec6916a
+aac3c553c3c7c1552a96
+c43c53f83afff857aec3
+93c17afec057fa95293a
+ae9696fffafffac3eac2
+a947ad13fafd507c3c3e
+8695696afafffe952bc3
+a96d543c3ad1516d4292
+ac5539696c5696953aae
+8579683c553d47abaec3
+a93abaa953c3956ac53a
+aac6c6ac7a96853853c2
+aa93956956c3c7a83c7a
+ec6c6d545554556ec556
 
----
-
-## 🐛 Troubleshooting
-
-### Problème 1 : **À COMPLÉTER**
-Solution : ...
-
-### Problème 2 : **À COMPLÉTER**
-Solution : ...
-
+2,6
+19,19
+SESEESSWSSWWSWSEEESWSSWNWSSSENESENEENNNWNENWNENESS....
+```
 ---
 
 ## 👥 Auteurs
 
-- **À COMPLÉTER** : Qui a développé ce projet ?
-
----
-
-## 📄 Licence
-
-**À COMPLÉTER** : Quelle est la licence du projet ? (MIT, GPL, etc.)
-
----
-
-## 📞 Support
-
-**À COMPLÉTER** : Comment contacter l'équipe de support ? Où signaler des bugs ?
-
----
-
-## 🔮 Améliorations futures
-
-- [ ] **À COMPLÉTER** : Ajoutez des fonctionnalités prévues
-
----
-
-**Dernière mise à jour** : Mars 2026
-
+- Fleur Caval
+- Benjamin Beaurain
