@@ -309,7 +309,7 @@ python3 -m build
 ```
 3. **Installer le paquet :**
 ```bash
-pip install dist/mazer-1.2.3-py3-none-any.whl
+pip install mazer-1.2.3-py3-none-any.whl
 ```
 ## 🩼 Utilisation de l'IA
 
