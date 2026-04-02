@@ -1,0 +1,12 @@
+[project]
+name = "mazegen"
+version = "1.0.1"
+description = "The 42 A-Maze-Ing project"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.12.5",
+    "flake8>=7.3.0",
+    "numpy>=1.26",
+    "typing-extensions>=4.12",
+]
