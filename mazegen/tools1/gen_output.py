@@ -66,6 +66,7 @@ def output(width: int, height: int, start: tuple[int, int],
             f.write("\n")
             for w in way:
                 f.write(w)
-    except (ValueError, AttributeError, PermissionError) as e:
+    except (ValueError, AttributeError, PermissionError,
+            FileNotFoundError) as e:
         print(f"{red}[ERROR]{reset}: in gen_output.py\n{e}")
         exit()

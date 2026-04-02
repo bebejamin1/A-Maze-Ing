@@ -41,11 +41,14 @@ if __name__ == "__main__":
     show_path = False
     wall_color = "\033[37m"
 
-    coord = get_tuple(config.ENTRY, config.EXIT)
-    output(config.WIDTH, config.HEIGHT, coord[0], coord[1],
-           config.PERFECT, config.OUTPUT_FILE, config.SEED)
-    maze, entry, exit_coord, path = maze_data_extract(
-                    config.OUTPUT_FILE)
+    try:
+        coord = get_tuple(config.ENTRY, config.EXIT)
+        output(config.WIDTH, config.HEIGHT, coord[0], coord[1],
+               config.PERFECT, config.OUTPUT_FILE, config.SEED)
+        maze, entry, exit_coord, path = maze_data_extract(
+                        config.OUTPUT_FILE)
+    except (ValueError, TypeError, ValidationError) as e:
+        print(f"\nERROR: {e}\n")
 
     while True:
         print()

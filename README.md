@@ -323,24 +323,9 @@ pip install mazegen-1.0.1-py3-none-any.whl
 ```
 Depuis un programme vous pouvez utiliser le module de cette manière:
 ```bash
-from mazegen.visualize.parsing import extract_config, MazeConfig, get_tuple
-from mazegen.tools1.gen_output import output
+from mazegen import createmaze
 
-cfg = extract_config("config.txt")
-config = MazeConfig.model_validate(cfg)
-
-entry_exit = get_tuple(config.ENTRY, config.EXIT)
-
-output(
-    config.WIDTH,
-    config.HEIGHT,
-    entry_exit[0],
-    entry_exit[1],
-    config.PERFECT,
-    config.OUTPUT_FILE,
-    config.SEED or None
-)
-print("Fichier généré :", config.OUTPUT_FILE)
+maze = createmaze("config.txt")
 ```
 Vous pouvez récuprer tous les attributs du labyrinthe via l'objet maze retourné par create_maze. Vous pouvez tout supprimer une fois l'opération terminée 👍
 

@@ -138,19 +138,16 @@ def extract_config(file_path: str) -> Dict[str, str]:
                     continue
 
                 if line.count("=") != 1:
-                    print(f"\nError: Invalid line format (must contain exactly"
-                          f" one '='): {line}")
-                    sys.exit()
+                    raise ValueError(f"\nError: Invalid line format ("
+                                     f"must contain exactly one '='): {line}")
 
                 key, value = map(str.strip, line.split("=", 1))
                 if not key:
-                    print(f"\nError: Invalid key in line: {line}")
-                    sys.exit()
+                    raise ValueError(f"\nError: Invalid key in line: {line}")
 
                 if value == "" and key != "SEED":
-                    print(f"\nError: Invalid value for key '{key}' in "
-                          f"line: {line}")
-                    sys.exit()
+                    raise ValueError(f"\nError: Invalid value for key '{key}'"
+                                     f" in line: {line}")
 
                 config[key] = value
 
@@ -162,6 +159,6 @@ def extract_config(file_path: str) -> Dict[str, str]:
 
         return config
 
-    except (FileNotFoundError, ValueError) as e:
+    except (FileNotFoundError) as e:
         print(f"\nERROR parsing: {e}\n")
         sys.exit()

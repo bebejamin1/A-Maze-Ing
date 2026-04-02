@@ -72,6 +72,10 @@ class GrowTree():
                     if (self.finish == (w, h)):
                         self.finish = (self.width - 1, self.height - 1)
 
+            if (self.finish == self.entry):
+                self.entry = (0, 0)
+                self.finish = (self.width - 1, self.height - 1)
+
             elif (state == "after"):
                 for y in range(len(grid)):
                     for x in range(len(grid[y])):
